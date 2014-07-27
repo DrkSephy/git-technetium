@@ -13,10 +13,16 @@ module.exports = function(router, request) {
     router.get('/issues', function(req, res) {
         request({
             url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/issues?state=all',
-            headers: { 'user-agent': 'git-technetium' }
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
-                res.send(body);
+                var issueTitles = [];
+                for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
+                    issueTitles.push(body[issueIndex].title);
+                }
+
+                res.send('<pre>' + issueTitles);
             }
         });
     });
