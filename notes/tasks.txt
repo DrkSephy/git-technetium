@@ -199,7 +199,7 @@ a full list of all issue titles in a given repository.
 | 
 + - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying all issues data on client....................[   ]
++ - - Create partial for displaying all issues data on client....................[ X ]
 
 
 
