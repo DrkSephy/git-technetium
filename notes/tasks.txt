@@ -1,0 +1,26 @@
+#########################################################
+#                   Tasks / Road map                    #
+#########################################################
+
+
+Project Setup: [ David ]
+------------------------
+ |
+ + - - Add package.json dependencies.................[   ]
+ |
+ + - - Add bower dependencies........................[   ]
+ |
+ + - - Create base server using Express..............[   ]
+ |     |
+ |     + - - Create basic route......................[   ]
+ | 
+ + - - Create base AngularJS Application.............[   ]
+       |
+       + - - Create base application controller......[   ]
+       |
+       + - - Create basic partials...................[   ]
+
+
+
+
+
