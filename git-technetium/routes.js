@@ -19,7 +19,9 @@ module.exports = function(router, request) {
             if(!error && response.statusCode === 200) {
                 var issueTitles = [];
                 for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
-                    issueTitles.push(body[issueIndex].title);
+                    if(!body[issueIndex].pull_request) {
+                        issueTitles.push(body[issueIndex].title);
+                    }
                 }
 
                 res.send('<pre>' + issueTitles);
