@@ -191,15 +191,15 @@ Issues For a Repository: [ Kevin ]
 This task involves creating a link which the user can click that returns
 a full list of all issue titles in a given repository. 
 
-+ - - Create server route for querying getting issues............................[   ]
++ - - Create server route for querying getting issues............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling issue data on client........................[   ]
++ - - Create controller for handling issue data on client........................[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying all issues data on client....................[   ]
++ - - Create partial for displaying all issues data on client....................[ X ]
 
 
 
