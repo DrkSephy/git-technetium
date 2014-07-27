@@ -9,4 +9,15 @@ module.exports = function(router, request) {
             }
         });
     });
+
+    router.get('/issues', function(req, res) {
+        request({
+            url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/issues?state=all',
+            headers: { 'user-agent': 'git-technetium' }
+        }, function(error, response, body) {
+            if(!error && response.statusCode === 200) {
+                res.send(body);
+            }
+        });
+    });
 }
