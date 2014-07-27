@@ -7,19 +7,19 @@ Project Setup: [ David ]
 ------------------------
 This task involves setting up a basic full stack application.
  
- + - - Add package.json dependencies.......................................[   ]
+ + - - Add package.json dependencies............................................[   ]
  |
- + - - Add bower dependencies..............................................[   ]
+ + - - Add bower dependencies...................................................[   ]
  |
- + - - Create base server using Express....................................[   ]
+ + - - Create base server using Express.........................................[   ]
  |     |
- |     + - - Create basic route............................................[   ]
+ |     + - - Create basic route.................................................[   ]
  | 
- + - - Create base AngularJS Application...................................[   ]
+ + - - Create base AngularJS Application........................................[   ]
        |
-       + - - Create base application controller............................[   ]
+       + - - Create base application controller.................................[   ]
        |
-       + - - Create basic partials.........................................[   ]
+       + - - Create basic partials..............................................[   ]
 
 
 Commits per Contributor: [ David ]
@@ -29,34 +29,177 @@ in turn will query a repository of their choosing, returning a list
 of numbers representing the number of commits that each contributor
 within the requested repository has done. 
 
-+ - - Create server route for querying number of commits..................[   ]
++ - - Create server route for querying number of commits.........................[   ]
 |     |
-|     + - - Parse data before sending to client...........................[   ]
+|     + - - Parse data before sending to client..................................[   ]
 |
-+ - - Create controller for handling commit data on client................[   ]
++ - - Create controller for handling commit data on client.......................[   ]
 |
-+ - - Create factory for getting data on client from server...............[   ]
++ - - Create factory for getting data on client from server......................[   ]
 |
-+ - - Create partial for displaying commit data on client.................[   ]
++ - - Create partial for displaying commit data on client........................[   ]
+
+
 
 Commit Comments Per Contributor: [ NOT CLAIMED ]
 ------------------------------------------------
-This task involved creating a link that the client can click which 
+This task involves creating a link that the client can click which 
 will return a list of the number of comments made on all commits in
 the given repository for each contributor. 
 
-+ - - Create server route for querying commit comments....................[   ]
++ - - Create server route for querying commit comments...........................[   ]
 |     |
-|     + - - Parse data before sending to client...........................[   ]
+|     + - - Parse data before sending to client..................................[   ]
 |
-+ - - Create controller for handling commit comment data on client........[   ]
++ - - Create controller for handling commit comment data on client...............[   ]
 | 
-+ - - Create factory for getting data on client from server...............[   ]
++ - - Create factory for getting data on client from server......................[   ]
 |
-+ - - Create partial for displaying commit comment data on client.........[   ]
++ - - Create partial for displaying commit comment data on client................[   ]
 
 
 
+Issue Comments Per Contributor: [ NOT CLAIMED ]
+-----------------------------------------------
+This task involves creating a link that the user can click which will 
+return a list of the number of comments made on all issues in a given
+repository for each contributor. 
+
++ - - Create server route for querying issue comments............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling issue comment data on client................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying issue comment data on client.................[   ]
+
+
+
+Pull Requests Per Contributor: [ NOT CLAIMED ]
+----------------------------------------------
+This task involves creating a link that the user can click which will
+return a list of the number of pull requests made for a given repository
+for each contributor. 
+
++ - - Create server route for querying pull requests.............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling pull request data on client.................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying pull request data on client..................[   ]
+
+
+
+Lines of Code Per Contributor: [ NOT CLAIMED ]
+----------------------------------------------
+This task involves creating a link that the user can click which will 
+return a list of the number of lines of code (addition and deletion)
+that each contributor has done for a given repository. 
+
++ - - Create server route for querying lines of code.............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling lines of code data on client................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying lines of code data on client.................[   ]
+
+
+
+Comments for Pull Requests Per Contributor: [ NOT CLAIMED ]
+-----------------------------------------------------------
+This task involves creating a link that the user can click which will
+return a list of the number of comments made for all pull requests in
+a given repository for all contributors.
+
++ - - Create server route for querying pull request comments.....................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling pull request comments data on client........[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying pull request comments data on client.........[   ]
+
+
+
+
+Number of Issues Opened Per Contributor: [ NOT CLAIMED ]
+--------------------------------------------------------
+This task involves creating a link that the user can click which will
+return a list of the number of issues opened in a repository by each
+contributor.
+
++ - - Create server route for querying issues opened.............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling issues opened data on client................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying issues opened data on client.................[   ]
+
+
+
+Number of Issues Assigned Per Contributor: [ NOT CLAIMED ]
+----------------------------------------------------------
+This task involves creating a link that the user can click which will
+return a list of the number of issues assigned to each contributor in
+a given repository. 
+
++ - - Create server route for querying issues assigned...........................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling issues assigned data on client..............[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying issues assigned data on client...............[   ]
+
+
+
+Number of Issues Closed Per Contributor: [ NOT CLAIMED ]
+----------------------------------------------------------
+This task involves creating a link that the user can click which will
+return a list of the number of issues closed by each contributor in
+a given repository. 
+
++ - - Create server route for querying issues closed.............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling issues closed data on client................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying issues closed data on client.................[   ]
+
+
+
+Issues For a Repository: [ NOT CLAIMED ]
+----------------------------------------
+This task involves creating a link which the user can click that returns
+a full list of all issue titles in a given repository. 
+
++ - - Create server route for querying getting issues............................[   ]
+|     |
+|     + - - Parse data before sending to client..................................[   ]
+|
++ - - Create controller for handling issue data on client........................[   ]
+| 
++ - - Create factory for getting data on client from server......................[   ]
+|
++ - - Create partial for displaying all issues data on client....................[   ]
 
 
 
