@@ -1,5 +1,6 @@
 // Require all needed modules
-var express = require('express');
+var express = require('express'),
+    request = require('request');
 
 // Create the Express application
 var app = express();
@@ -8,7 +9,7 @@ var app = express();
 var router = express.Router();
 
 // Register routes of Router
-require('./routes')(router);
+require('./routes')(router, request);
 
 // Prefix all routes with /api
 app.use('/api', router);
