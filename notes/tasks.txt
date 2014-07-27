@@ -191,7 +191,7 @@ Issues For a Repository: [ Kevin ]
 This task involves creating a link which the user can click that returns
 a full list of all issue titles in a given repository. 
 
-+ - - Create server route for querying getting issues............................[   ]
++ - - Create server route for querying getting issues............................[ X ]
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
