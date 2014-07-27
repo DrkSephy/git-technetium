@@ -23,8 +23,7 @@ module.exports = function(router, request) {
                         issueTitles.push(body[issueIndex].title);
                     }
                 }
-
-                res.send('<pre>' + issueTitles);
+                res.send(issueTitles);
             }
         });
     });

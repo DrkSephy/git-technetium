@@ -193,7 +193,7 @@ a full list of all issue titles in a given repository.
 
 + - - Create server route for querying getting issues............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
 + - - Create controller for handling issue data on client........................[   ]
 | 
