@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en-us" data-ng-app="gitApp">
+<html lang="en-us" data-ng-app="gitApp" data-ng-controller="gitController">
     <head>
         <meta charset="utf-8">
 
-        <title>Git-Technetium</title>
+        <title data-ng-bind="pageTitle + ' | Git-Technetium'">Git-Technetium</title>
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.20/angular.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/gitController.js"></script>
     </head>
 
     <body>
