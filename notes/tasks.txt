@@ -186,7 +186,7 @@ a given repository.
 
 
 
-Issues For a Repository: [ NOT CLAIMED ]
+Issues For a Repository: [ Kevin ]
 ----------------------------------------
 This task involves creating a link which the user can click that returns
 a full list of all issue titles in a given repository. 
