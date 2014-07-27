@@ -5,20 +5,58 @@
 
 Project Setup: [ David ]
 ------------------------
+This task involves setting up a basic full stack application.
+ 
+ + - - Add package.json dependencies.......................................[   ]
  |
- + - - Add package.json dependencies.................[   ]
+ + - - Add bower dependencies..............................................[   ]
  |
- + - - Add bower dependencies........................[   ]
- |
- + - - Create base server using Express..............[   ]
+ + - - Create base server using Express....................................[   ]
  |     |
- |     + - - Create basic route......................[   ]
+ |     + - - Create basic route............................................[   ]
  | 
- + - - Create base AngularJS Application.............[   ]
+ + - - Create base AngularJS Application...................................[   ]
        |
-       + - - Create base application controller......[   ]
+       + - - Create base application controller............................[   ]
        |
-       + - - Create basic partials...................[   ]
+       + - - Create basic partials.........................................[   ]
+
+
+Commits per Contributor: [ David ]
+----------------------------------
+This task involves creating a link that the client can click which
+in turn will query a repository of their choosing, returning a list
+of numbers representing the number of commits that each contributor
+within the requested repository has done. 
+
++ - - Create server route for querying number of commits..................[   ]
+|     |
+|     + - - Parse data before sending to client...........................[   ]
+|
++ - - Create controller for handling commit data on client................[   ]
+|
++ - - Create factory for getting data on client from server...............[   ]
+|
++ - - Create partial for displaying commit data on client.................[   ]
+
+Commit Comments Per Contributor: [ NOT CLAIMED ]
+------------------------------------------------
+This task involved creating a link that the client can click which 
+will return a list of the number of comments made on all commits in
+the given repository for each contributor. 
+
++ - - Create server route for querying commit comments....................[   ]
+|     |
+|     + - - Parse data before sending to client...........................[   ]
+|
++ - - Create controller for handling commit comment data on client........[   ]
+| 
++ - - Create factory for getting data on client from server...............[   ]
+|
++ - - Create partial for displaying commit comment data on client.........[   ]
+
+
+
 
 
 
