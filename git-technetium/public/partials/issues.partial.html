@@ -1,1 +1,8 @@
-<p data-ng-repeat="issueTitle in pageData">{{ issueTitle }}</p>
+<table>
+    <tr>
+        <th>Title</th>
+    </tr>
+    <tr data-ng-repeat="issueTitle in pageData">
+        <td>{{ issueTitle }}</td>
+    </tr>
+</table>
