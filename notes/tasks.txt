@@ -197,7 +197,7 @@ a full list of all issue titles in a given repository.
 |
 + - - Create controller for handling issue data on client........................[   ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
 + - - Create partial for displaying all issues data on client....................[   ]
 
