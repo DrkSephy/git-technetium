@@ -7,19 +7,19 @@ Project Setup: [ David ]
 ------------------------
 This task involves setting up a basic full stack application.
  
- + - - Add package.json dependencies............................................[   ]
+ + - - Add package.json dependencies............................................[ X ]
  |
- + - - Add bower dependencies...................................................[   ]
+ + - - Add bower dependencies...................................................[ X ]
  |
- + - - Create base server using Express.........................................[   ]
+ + - - Create base server using Express.........................................[ X ]
  |     |
- |     + - - Create basic route.................................................[   ]
+ |     + - - Create basic route.................................................[ X ]
  | 
- + - - Create base AngularJS Application........................................[   ]
+ + - - Create base AngularJS Application........................................[ X ]
        |
-       + - - Create base application controller.................................[   ]
+       + - - Create base application controller.................................[ X ]
        |
-       + - - Create basic partials..............................................[   ]
+       + - - Create basic partials..............................................[ X ]
 
 
 Commits per Contributor: [ David ]
