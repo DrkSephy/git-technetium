@@ -132,7 +132,7 @@ a given repository for all contributors.
 
 
 
-Number of Issues Opened Per Contributor: [ NOT CLAIMED ]
+Number of Issues Opened Per Contributor: [ Kevin ]
 --------------------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of issues opened in a repository by each
