@@ -12,7 +12,7 @@ module.exports = function(router, request) {
 
     router.get('/issues', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/issues?state=all',
+            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {

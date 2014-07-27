@@ -2,10 +2,14 @@
 
 gitApp.factory('issuesFactory', function($http) {
     return {
-        get: function() {
+        get: function(ownerName, repoName) {
             return $http({
                 url: '/api/issues',
-                method: 'GET'
+                method: 'GET',
+                params: {
+                    ownerName: ownerName,
+                    repoName: repoName
+                }
             });
         }
     };

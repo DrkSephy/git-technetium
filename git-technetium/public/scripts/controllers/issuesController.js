@@ -2,7 +2,10 @@
 
 gitApp.controller('issuesController', function($scope, issuesFactory) {
     $scope.pageData = [];
-    $scope.pageData = issuesFactory.get().success(function(data) {
-        $scope.pageData = data;
-    });
+
+    $scope.submitQuery = function() {
+        $scope.pageData = issuesFactory.get($scope.ownerName, $scope.repoName).success(function(data) {
+            $scope.pageData = data;
+        });
+    }
 });
