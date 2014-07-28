@@ -138,7 +138,7 @@ This task involves creating a link that the user can click which will
 return a list of the number of issues opened in a repository by each
 contributor.
 
-+ - - Create server route for querying issues opened.............................[   ]
++ - - Create server route for querying issues opened.............................[ X ]
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
