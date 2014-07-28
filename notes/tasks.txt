@@ -144,7 +144,7 @@ contributor.
 |
 + - - Create controller for handling issues opened data on client................[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
 + - - Create partial for displaying issues opened data on client.................[ X ]
 
