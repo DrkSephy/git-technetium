@@ -142,7 +142,7 @@ contributor.
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
-+ - - Create controller for handling issues opened data on client................[   ]
++ - - Create controller for handling issues opened data on client................[ X ]
 | 
 + - - Create factory for getting data on client from server......................[   ]
 |
