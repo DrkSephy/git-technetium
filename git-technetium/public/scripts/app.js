@@ -20,5 +20,13 @@ var gitApp = angular.module('gitApp', [
             data: {
                 pageTitle: 'Issues'
             }
+        })
+        .state('issues_opened', {
+            url: '/issues_opened',
+            templateUrl: 'partials/issues_opened.partial.html',
+            controller: 'issuesOpenedController',
+            data: {
+                pageTitle: 'Issues Opened Per Contributor'
+            }
         });
 });
