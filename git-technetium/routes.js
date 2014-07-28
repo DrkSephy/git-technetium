@@ -27,4 +27,16 @@ module.exports = function(router, request) {
             }
         });
     });
+
+    router.get('/issues_opened', function(req, res) {
+        request({
+            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body) {
+            if(!error && response.statusCode === 200) {
+                res.send(body);
+            }
+        });
+    });
 }
