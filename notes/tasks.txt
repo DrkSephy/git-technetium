@@ -146,7 +146,7 @@ contributor.
 | 
 + - - Create factory for getting data on client from server......................[   ]
 |
-+ - - Create partial for displaying issues opened data on client.................[   ]
++ - - Create partial for displaying issues opened data on client.................[ X ]
 
 
 
