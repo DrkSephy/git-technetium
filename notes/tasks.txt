@@ -77,7 +77,7 @@ repository for each contributor.
 
 
 
-Pull Requests Per Contributor: [ NOT CLAIMED ]
+Pull Requests Per Contributor: [ Kim ]
 ----------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of pull requests made for a given repository
