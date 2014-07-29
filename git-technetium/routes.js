@@ -28,6 +28,11 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+      * Route to query total commits per contributor within a given repository.
+      * params: owner, repo
+      * github api endpoint: /stats/contributors
+    **/
     router.get('/commits', function(req, res){
         request({
             url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
