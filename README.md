@@ -31,6 +31,18 @@ There is also a test endpoint for the client. If you go to `127.0.0.1:8080/#/hel
 
 You are now ready to start creating your own routes and begin any of the tasks listed within `notes/tasks.txt`.
 
+Existing Routes
+---------------
+
+After getting the project running, the following client-side routes are currently available for use: 
+    
+    // Returns all issue titles for a given repository.
+    127.0.0.1:8080/#/issues
+
+    // Returns a listing of the number of commits for each contributor for a given repository.
+    127.0.0.1:8080/#/commits
+
+
 Useful Libraries / Links
 ------------------------
 
