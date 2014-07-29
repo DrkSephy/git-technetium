@@ -30,7 +30,7 @@ module.exports = function(router, request) {
 
     router.get('/commits', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/WaterEmblem/stats/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/WaterEmblem/stats/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){

@@ -20,5 +20,13 @@ var gitApp = angular.module('gitApp', [
             data: {
                 pageTitle: 'Issues'
             }
+        })
+        .state('commits', {
+            url: '/commits',
+            templateUrl: 'partials/commits.partial.html',
+            controller: 'commitsController',
+            data: {
+                pageTitle: 'Commits'
+            }
         });
 });
