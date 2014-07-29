@@ -65,7 +65,7 @@ module.exports = function(router, request) {
             if(!error && response.statusCode === 200){
                 var contributors =[];
                 for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
-                    contributors.push(body[contributor_index].author.login);
+                    contributors.push(body[contributor_index].login);
                 }
                 res.send(contributors);
             }
