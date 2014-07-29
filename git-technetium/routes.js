@@ -58,17 +58,17 @@ module.exports = function(router, request) {
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){
-            if (!error && response.statusCode === 200){
+            if(!error && response.statusCode === 200){
                 var contributors =[];
                 for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].author.login);
                 }
                 res.send(contributors);
             }
-        })
+        });
     });
 }
