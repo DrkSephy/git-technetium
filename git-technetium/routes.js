@@ -76,13 +76,22 @@ module.exports = function(router, request) {
                         'commit_comments': 0
                     };
                 }
-                
+
                 request({
                     url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/comments',
                     headers: { 'user-agent' : 'git-technetium' },
                     json: true
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
+                        // Loop through each comment, check if the commenter name matches a contributor.
+                        // If match, increment commit_comments by 1. 
+                        for(var comment_index = 0; comment_index < body.length; comment_index++){
+                            for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
+                                if(body[comment_index].user.login === contributor_comments[contributor_index].name){
+                                    contributor_comments[contributor_index].commit_comments++;
+                                }
+                            }
+                        }
                         res.send(contributor_comments)
                     }
                 }); // End second request function
