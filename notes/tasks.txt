@@ -140,7 +140,7 @@ contributor.
 
 + - - Create server route for querying issues opened.............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
 + - - Create controller for handling issues opened data on client................[ X ]
 | 
