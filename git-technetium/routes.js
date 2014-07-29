@@ -27,4 +27,16 @@ module.exports = function(router, request) {
             }
         });
     });
+
+    router.get('/commits', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/DrkSephy/WaterEmblem/stats/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                res.send(body);
+            }
+        });
+    });
 }
