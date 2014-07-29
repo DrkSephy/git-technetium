@@ -41,7 +41,7 @@ within the requested repository has done.
 
 
 
-Commit Comments Per Contributor: [ NOT CLAIMED ]
+Commit Comments Per Contributor: [ David ]
 ------------------------------------------------
 This task involves creating a link that the client can click which 
 will return a list of the number of comments made on all commits in
