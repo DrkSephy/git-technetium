@@ -78,7 +78,7 @@ module.exports = function(router, request) {
                 }
 
                 request({
-                    url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/comments',
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments',
                     headers: { 'user-agent' : 'git-technetium' },
                     json: true
                 }, function(error, response, body){
