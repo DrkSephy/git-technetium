@@ -30,16 +30,17 @@ module.exports = function(router, request) {
 
     router.get('/commits', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
                 for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
-                    contributors.push(body[contributor_index].login);
-                } 
+                    contributors.push("Author: " + body[contributor_index].author.login + " , " + "Commits: " + body[contributor_index].total);
+                }
                 res.send(contributors);
+                
             }
         });
     });
