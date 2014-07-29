@@ -150,7 +150,7 @@ contributor.
 
 
 
-Number of Issues Assigned Per Contributor: [ NOT CLAIMED ]
+Number of Issues Assigned Per Contributor: [ Kevin ]
 ----------------------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of issues assigned to each contributor in
