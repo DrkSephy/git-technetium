@@ -53,7 +53,7 @@ module.exports = function(router, request) {
      /**
       * Route to query total commit comments per contributor within a given repository.
       * params: owner, repo
-      * github api endpoint: https://api.github/com/repos/:owner/:repo
+      * github api endpoint: https://api.github/com/repos/:owner/:repo/comments
     **/
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
@@ -67,8 +67,16 @@ module.exports = function(router, request) {
                 for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
-                res.send(contributors);
+                request({
+                    url: 'https://api.github.com/repos/chessmasterhong/WaterEmblem/comments',
+                    headers: { 'user-agent' : 'git-technetium' },
+                    json: true
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        res.send(body);
+                    }
+                }); // End second request function
             }
-        });
+        }); // End first request function
     });
 }
