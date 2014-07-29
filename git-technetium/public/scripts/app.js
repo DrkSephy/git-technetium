@@ -28,5 +28,21 @@ var gitApp = angular.module('gitApp', [
             data: {
                 pageTitle: 'Issues Opened Per Contributor'
             }
+        })
+        .state('commits', {
+            url: '/commits',
+            templateUrl: 'partials/commits.partial.html',
+            controller: 'commitsController',
+            data: {
+                pageTitle: 'Commits'
+            }
+        })
+        .state('commitComments', {
+            url: '/commitComments',
+            templateUrl: 'partials/commitComments.partial.html',
+            controller: 'commitCommentsController',
+            data: {
+                pageTitle: 'Commit Comments'
+            }
         });
 });
