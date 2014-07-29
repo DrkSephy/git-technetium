@@ -10,6 +10,13 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+     *  Precondition:
+     *      ownerName (string): The owner username of the target repository
+     *      repoName (string): The target repository name
+     *  Postcondition:
+     *      An array, where each element contains the title of an issue in the repository
+    **/
     router.get('/issues', function(req, res) {
         request({
             url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
@@ -28,6 +35,15 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+     *  Precondition:
+     *      ownerName (string): The owner username of the target repository
+     *      repoName (string): The target repository name
+     *  Postcondition:
+     *      An array of objects, where each object contains the following properties:
+     *          name (string): The contributor username
+     *          issues_opened (string): The number of issues opened by the respective contributor
+    **/
     router.get('/issues_opened', function(req, res) {
         request({
             url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
