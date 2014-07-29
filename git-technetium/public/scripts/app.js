@@ -28,5 +28,13 @@ var gitApp = angular.module('gitApp', [
             data: {
                 pageTitle: 'Commits'
             }
+        })
+        .state('commitComments', {
+            url: '/commitComments',
+            templateUrl: 'partials/commitComments.partial.html',
+            controller: 'commitCommentsController',
+            data: {
+                pageTitle: 'Commit Comments'
+            }
         });
 });
