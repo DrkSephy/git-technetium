@@ -1,6 +1,6 @@
 'use strict';
 
-gitApp.factory('issuesFactory', function($http){
+gitApp.factory('commitsFactory', function($http){
     return {
         get: function(owner, repo){
             return $http({
