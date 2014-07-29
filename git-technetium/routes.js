@@ -31,7 +31,7 @@ module.exports = function(router, request) {
     /**
       * Route to query total commits per contributor within a given repository.
       * params: owner, repo
-      * github api endpoint: /stats/contributors
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
     **/
     router.get('/commits', function(req, res){
         request({
@@ -50,7 +50,13 @@ module.exports = function(router, request) {
         });
     });
 
+     /**
+      * Route to query total commit comments per contributor within a given repository.
+      * params: owner, repo
+      * github api endpoint: https://api.github/com/repos/:owner/:repo
+    **/
     router.get('/commitComments', function(req, res){
+        // First request builds a list of all contributors for a given repository.
         request({
             url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: { 'user-agent': 'git-technetium' },
