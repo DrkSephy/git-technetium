@@ -29,15 +29,15 @@ in turn will query a repository of their choosing, returning a list
 of numbers representing the number of commits that each contributor
 within the requested repository has done. 
 
-+ - - Create server route for querying number of commits.........................[   ]
++ - - Create server route for querying number of commits.........................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling commit data on client.......................[   ]
++ - - Create controller for handling commit data on client.......................[ X ]
 |
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying commit data on client........................[   ]
++ - - Create partial for displaying commit data on client........................[ X ]
 
 
 
