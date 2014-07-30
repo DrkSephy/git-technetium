@@ -156,7 +156,7 @@ This task involves creating a link that the user can click which will
 return a list of the number of issues assigned to each contributor in
 a given repository. 
 
-+ - - Create server route for querying issues assigned...........................[   ]
++ - - Create server route for querying issues assigned...........................[ X ]
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
