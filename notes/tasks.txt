@@ -156,15 +156,15 @@ This task involves creating a link that the user can click which will
 return a list of the number of issues assigned to each contributor in
 a given repository. 
 
-+ - - Create server route for querying issues assigned...........................[   ]
++ - - Create server route for querying issues assigned...........................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling issues assigned data on client..............[   ]
++ - - Create controller for handling issues assigned data on client..............[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying issues assigned data on client...............[   ]
++ - - Create partial for displaying issues assigned data on client...............[ X ]
 
 
 
