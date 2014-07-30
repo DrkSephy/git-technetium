@@ -59,7 +59,7 @@ the given repository for each contributor.
 
 
 
-Issue Comments Per Contributor: [ NOT CLAIMED ]
+Issue Comments Per Contributor: [ Kim ]
 -----------------------------------------------
 This task involves creating a link that the user can click which will 
 return a list of the number of comments made on all issues in a given
