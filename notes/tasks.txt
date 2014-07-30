@@ -158,7 +158,7 @@ a given repository.
 
 + - - Create server route for querying issues assigned...........................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
 + - - Create controller for handling issues assigned data on client..............[ X ]
 | 
