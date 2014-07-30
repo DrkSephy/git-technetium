@@ -157,4 +157,34 @@ module.exports = function(router, request) {
             }
         }); // End first request function
     });
+
+    /**
+     **Route to query the total pull requests per contributor within a given repository
+     **params: ownerName, repoName
+    **/
+    router.get('/pulls', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/' + "pulls?state=closed",
+            //url: 'https://api.github.com/repos/DrkSephy/git-technetium/pulls?state=closed',
+            headers: {'user-agent' : 'git-technetium'},
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var contributors=[];
+                var contributors_tally={};
+                for(var contributor_index = 0; contributor_index< body.length; contributor_index++){
+                    if (contributors.indexOf(body[contributor_index].user.login) < 0){
+                        contributors.push(body[contributor_index].user.login);
+                        contributors_tally[body[contributor_index].user.login] = 1;
+                    }
+                    else
+                    {
+                        contributors_tally[body[contributor_index].user.login]++;
+                    }
+                }
+                res.send(contributors_tally);
+            }
+        });
+    });
+
 }
