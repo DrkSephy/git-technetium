@@ -31,7 +31,7 @@ module.exports = function(router, request) {
     /**
       * Route to query total commits per contributor within a given repository.
       * params: owner, repo
-      * github api endpoint: /stats/contributors
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
     **/
     router.get('/commits', function(req, res){
         request({
@@ -48,5 +48,54 @@ module.exports = function(router, request) {
                 
             }
         });
+    });
+
+     /**
+      * Route to query total commit comments per contributor within a given repository.
+      * params: owner, repo
+      * github api endpoint: https://api.github/com/repos/:owner/:repo/comments
+    **/
+    router.get('/commitComments', function(req, res){
+        // First request builds a list of all contributors for a given repository.
+        request({
+            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var contributors =[];
+
+                for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributors.push(body[contributor_index].login);
+                }
+
+                var contributor_comments = [];
+                for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
+                    contributor_comments[contributor_index] = {
+                        'name': contributors[contributor_index],
+                        'commit_comments': 0
+                    };
+                }
+
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments',
+                    headers: { 'user-agent' : 'git-technetium' },
+                    json: true
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        // Loop through each comment, check if the commenter name matches a contributor.
+                        // If match, increment commit_comments by 1. 
+                        for(var comment_index = 0; comment_index < body.length; comment_index++){
+                            for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
+                                if(body[comment_index].user.login === contributor_comments[contributor_index].name){
+                                    contributor_comments[contributor_index].commit_comments++;
+                                }
+                            }
+                        }
+                        res.send(contributor_comments)
+                    }
+                }); // End second request function
+            }
+        }); // End first request function
     });
 }

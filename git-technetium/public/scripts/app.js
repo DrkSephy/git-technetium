@@ -29,12 +29,12 @@ var gitApp = angular.module('gitApp', [
                 pageTitle: 'Commits'
             }
         })
-        .state('pulls', {
-            url: '/pulls',
-            templateUrl: 'partials/pulls.partial.html',
-            controller: 'pullsController',
-            data:{
-                pageTitle: 'Pulls'
+        .state('commitComments', {
+            url: '/commitComments',
+            templateUrl: 'partials/commitComments.partial.html',
+            controller: 'commitCommentsController',
+            data: {
+                pageTitle: 'Commit Comments'
             }
         });
 });

@@ -47,15 +47,15 @@ This task involves creating a link that the client can click which
 will return a list of the number of comments made on all commits in
 the given repository for each contributor. 
 
-+ - - Create server route for querying commit comments...........................[   ]
++ - - Create server route for querying commit comments...........................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling commit comment data on client...............[   ]
++ - - Create controller for handling commit comment data on client...............[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying commit comment data on client................[   ]
++ - - Create partial for displaying commit comment data on client................[ X ]
 
 
 
