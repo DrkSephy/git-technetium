@@ -1,0 +1,15 @@
+<form ng-submit="submitQuery()">
+    <p>
+        <strong>Repository Owner's Name: </strong><input type="text" ng-model="owner" required><br>
+        <strong>Repository Name: </strong><input type="text" ng-model="repo" required><br>
+        <button type="submit">Get Pull Requests by each Contributors</button>
+    </p>
+</form>
+
+
+<table>
+	<tr data-ng-repeat="(user,total) in pageData">
+		<td>{{user}}</td>
+		<td>{{total}}</td>
+	</tr>
+</table>
