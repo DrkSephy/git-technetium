@@ -87,9 +87,9 @@ for each contributor.
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
-+ - - Create controller for handling pull request data on client.................[   ]
++ - - Create controller for handling pull request data on client.................[ x ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ x ]
 |
 + - - Create partial for displaying pull request data on client..................[   ]
 
