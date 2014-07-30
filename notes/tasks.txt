@@ -162,7 +162,7 @@ a given repository.
 |
 + - - Create controller for handling issues assigned data on client..............[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
 + - - Create partial for displaying issues assigned data on client...............[ X ]
 
