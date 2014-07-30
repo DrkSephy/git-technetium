@@ -49,6 +49,7 @@ module.exports = function(router, request) {
             }
         });
     });
+
      /**
       * Route to query total commit comments per contributor within a given repository.
       * params: owner, repo
