@@ -160,7 +160,7 @@ a given repository.
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
-+ - - Create controller for handling issues assigned data on client..............[   ]
++ - - Create controller for handling issues assigned data on client..............[ X ]
 | 
 + - - Create factory for getting data on client from server......................[   ]
 |
