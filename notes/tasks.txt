@@ -168,7 +168,7 @@ a given repository.
 
 
 
-Number of Issues Closed Per Contributor: [ NOT CLAIMED ]
+Number of Issues Closed Per Contributor: [ Kevin ]
 ----------------------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of issues closed by each contributor in
