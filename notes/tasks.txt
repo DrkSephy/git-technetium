@@ -83,15 +83,15 @@ This task involves creating a link that the user can click which will
 return a list of the number of pull requests made for a given repository
 for each contributor. 
 
-+ - - Create server route for querying pull requests.............................[   ]
++ - - Create server route for querying pull requests.............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling pull request data on client.................[ x ]
++ - - Create controller for handling pull request data on client.................[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[ x ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying pull request data on client..................[   ]
++ - - Create partial for displaying pull request data on client..................[ X ]
 
 
 
