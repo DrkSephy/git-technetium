@@ -239,4 +239,35 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+     **Route to query the total issues comments  per contributor within a given repository
+     **params: ownerName, repoName
+    **/
+    router.get('/issuesComments', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/' + 'issues/comments',
+            headers: {'user-agent' : 'git-technetium'},
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var contributors =[];
+                var contributors_tally = {};
+                var re = '/pull/'
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++)
+                {
+                    if(!body[contributor_index].html_url.match(re)){
+                        if(contributors.indexOf(body[contributor_index].user.login)<0){
+                            contributors.push(body[contributor_index].user.login);
+                            contributors_tally[body[contributor_index].user.login] = 1;
+                        }
+                        else{
+                            contributors_tally[body[contributor_index].user.login]++;
+                        }
+                    }
+
+                }
+                res.send(contributors_tally);
+            }
+        });
+    });
 }
