@@ -65,15 +65,15 @@ This task involves creating a link that the user can click which will
 return a list of the number of comments made on all issues in a given
 repository for each contributor. 
 
-+ - - Create server route for querying issue comments............................[   ]
++ - - Create server route for querying issue comments............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling issue comment data on client................[   ]
++ - - Create controller for handling issue comment data on client................[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying issue comment data on client.................[   ]
++ - - Create partial for displaying issue comment data on client.................[ X ]
 
 
 
