@@ -60,6 +60,14 @@ var gitApp = angular.module('gitApp', [
             data: {
                 pageTitle: 'Pulls'
             }
+        })
+        .state('issuesComments', {
+            url: '/issuesComments',
+            templateUrl: 'partials/issues_comments.partial.html',
+            controller: 'issuesCommentsController',
+            data:{
+                pageTitle: 'Issues Comments'
+            }
         });
 
 });
