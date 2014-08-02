@@ -113,7 +113,7 @@ that each contributor has done for a given repository.
 
 
 
-Comments for Pull Requests Per Contributor: [ NOT CLAIMED ]
+Comments for Pull Requests Per Contributor: [ Kim]
 -----------------------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of comments made for all pull requests in
