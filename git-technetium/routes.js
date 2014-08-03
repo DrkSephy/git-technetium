@@ -140,6 +140,25 @@ module.exports = function(router, request) {
     });
 
     /**
+     *  Precondition:
+     *      ownerName (string): The owner username of the target repository
+     *      repoName (string): The target repository name
+     *  Postcondition:
+     *      An array of objects, where each object contains the following properties:
+     *          name (string): The contributor username
+     *          issues_opened (string): The number of issues closed by the respective contributor
+    **/
+    router.get('/issues_closed', function(req, res) {
+        request({
+            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body) {
+            if(!error && response.statusCode === 200) {}
+        });
+    });
+
+    /**
       * Route to query total commits per contributor within a given repository.
       * params: owner, repo
       * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
