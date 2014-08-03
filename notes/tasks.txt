@@ -174,7 +174,7 @@ This task involves creating a link that the user can click which will
 return a list of the number of issues closed by each contributor in
 a given repository. 
 
-+ - - Create server route for querying issues closed.............................[   ]
++ - - Create server route for querying issues closed.............................[ X ]
 |     |
 |     + - - Parse data before sending to client..................................[   ]
 |
