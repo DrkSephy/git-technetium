@@ -182,7 +182,7 @@ a given repository.
 | 
 + - - Create factory for getting data on client from server......................[   ]
 |
-+ - - Create partial for displaying issues closed data on client.................[   ]
++ - - Create partial for displaying issues closed data on client.................[ X ]
 
 
 
