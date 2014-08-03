@@ -180,7 +180,7 @@ a given repository.
 |
 + - - Create controller for handling issues closed data on client................[   ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
 + - - Create partial for displaying issues closed data on client.................[ X ]
 
