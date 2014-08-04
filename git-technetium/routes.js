@@ -154,7 +154,54 @@ module.exports = function(router, request) {
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
-            if(!error && response.statusCode === 200) {}
+            if(!error && response.statusCode === 200) {
+                var contributors = [];
+                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
+                    contributors.push(body[contributorIndex].login);
+                }
+
+                var contributorIssuesClosed = [];
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                    contributorIssuesClosed.push({
+                        'name': contributors[contributorIndex],
+                        'issues_closed': 0
+                    });
+                }
+
+                // yeah... probably not the most elegant way to do this...
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=closed',
+                    headers: { 'user-agent': 'git-technetium' },
+                    json: true
+                }, function(error, response, body) {
+                    if(!error && response.statusCode === 200) {
+                        for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
+                            if(!body[issueIndex].pull_request) {
+                                request({
+                                    url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + (body[issueIndex].number - 1) + '/events',
+                                    headers: { 'user-agent': 'git-technetium' },
+                                    json: true
+                                }, function(error, response, body) {
+                                    if(!error && response.statusCode === 200) {
+                                        for(var eventIndex = body.length - 1; eventIndex >= 0; eventIndex--) {
+                                            if(body[eventIndex].event === 'closed') {
+                                                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                                                    if(body[eventIndex].actor.login === contributorIssuesClosed[contributorIndex].name) {
+                                                        contributorIssuesClosed[contributorIndex].issues_closed++;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        res.send(contributorIssuesClosed);
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            }
         });
     });
 
@@ -175,7 +222,7 @@ module.exports = function(router, request) {
                     contributors.push("Author: " + body[contributor_index].author.login + " , " + "Commits: " + body[contributor_index].total);
                 }
                 res.send(contributors);
-                
+
             }
         });
     });
@@ -214,7 +261,7 @@ module.exports = function(router, request) {
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
                         // Loop through each comment, check if the commenter name matches a contributor.
-                        // If match, increment commit_comments by 1. 
+                        // If match, increment commit_comments by 1.
                         for(var comment_index = 0; comment_index < body.length; comment_index++){
                             for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
                                 if(body[comment_index].user.login === contributor_comments[contributor_index].name){
