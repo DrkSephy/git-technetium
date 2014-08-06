@@ -168,14 +168,15 @@ module.exports = function(router, request) {
     **/
     router.get('/loc', function(req, res){
         request({
-            urls: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 res.send(body);
+                
             }
-        }); // End request for data
+        });
     }); // End router.get
 
      /**
