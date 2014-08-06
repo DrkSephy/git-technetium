@@ -202,7 +202,7 @@ a full list of all issue titles in a given repository.
 + - - Create partial for displaying all issues data on client....................[ X ]
 
 
-Frontend: [ NOT CLAIMED ]
+Frontend: [ David ]
 -------------------------
 A beautiful frontend needs to be built. Anyone can take this up at the same time,
 we can simply see which design fits this application the best.
