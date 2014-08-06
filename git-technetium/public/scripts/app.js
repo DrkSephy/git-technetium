@@ -45,7 +45,7 @@ var gitApp = angular.module('gitApp', [
                 pageTitle: 'Commits'
             }
         })
-        .state('commits', {
+        .state('loc', {
             url: '/loc',
             templateUrl: 'partials/loc.partial.html',
             controller: 'locController',
