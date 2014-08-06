@@ -1,6 +1,6 @@
 'use strict';
 
-gitApp.factory('locFactory', function($https){
+gitApp.factory('locFactory', function($http){
     return {
         get: function(owner, repo){
             return $http({
