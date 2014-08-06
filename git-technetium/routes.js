@@ -173,7 +173,17 @@ module.exports = function(router, request) {
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
-                res.send(body);
+                var loc_added = 0;
+                var loc_deleted = 0;
+                var contributors = [];
+                for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    for(var week_index = 0; week_index < body[contributor_index].weeks.length; week_index++){
+                        loc_added += body[contributor_index].weeks[week_index].a;
+                        loc_deleted += body[contributor_index].weeks[week_index].d;
+                    }
+                    contributors.push("Author: " + body[contributor_index].author.login + " , " + "Added: " + loc_added + " , " + "Deleted: " + loc_deleted);
+                }
+                res.send(contributors);
                 
             }
         });
