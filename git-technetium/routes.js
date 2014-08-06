@@ -13,7 +13,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array, where each element contains the title of an issue in the repository
     **/
@@ -38,7 +38,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array of objects, where each object contains the following properties:
      *          name (string): The contributor username
@@ -90,7 +90,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array of objects, where each object contains the following properties:
      *          name (string): The contributor username
@@ -161,10 +161,27 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+      * Route to query lines of code added/deleted per contributor within a given repository.
+      * params: owner, repo
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
+    **/
+    router.get('/loc', function(req, res){
+        request({
+            urls: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                res.send(body);
+            }
+        }); // End request for data
+    }); // End router.get
+
      /**
       * Route to query total commit comments per contributor within a given repository.
       * params: owner, repo
-      * github api endpoint: https://api.github/com/repos/:owner/:repo/comments
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/comments
     **/
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
