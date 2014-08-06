@@ -1,0 +1,9 @@
+<form ng-submit="submitQuery()">
+    <p>
+        <strong>Repository Owner's Name: </strong><input type="text" ng-model="owner" required><br>
+        <strong>Repository Name: </strong><input type="text" ng-model="repo" required><br>
+        <button type="submit">Get Lines of Code</button>
+    </p>
+</form>
+
+{{ pageData }}
