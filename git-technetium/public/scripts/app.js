@@ -76,6 +76,13 @@ var gitApp = angular.module('gitApp', [
             data:{
                 pageTitle: 'Issues Comments'
             }
+        })
+        .state('pullRequestComments', {
+            url: '/pullRequestComments',
+            templateUrl: 'partials/pull_requestsComment.partial.html',
+            controller: 'pullRequestCommentsController',
+            data: {
+                pageTitle: 'Pull Requests Comments'
+            }
         });
-
 });
