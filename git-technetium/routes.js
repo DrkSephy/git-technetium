@@ -280,7 +280,7 @@ module.exports = function(router, request) {
             if(!error && response.statusCode === 200){
                 var contributors =[];
                 var contributors_tally = {};
-                var re = '/pull/'
+                var re = '/pull/';
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++)
                 {
                     if(!body[contributor_index].html_url.match(re)){
@@ -298,4 +298,64 @@ module.exports = function(router, request) {
             }
         });
     });
+
+    /**
+     **Route to query the pull request comments  per contributor within a given repository
+     **params: ownerName, repoName
+    **/
+    router.get('/pullRequestComments', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            headers: {'user-agent' : 'git-technetium'},
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var contributors = [];
+                var contributor_tally =[];
+
+                //Obtaining list of contributors
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributors.push(body[contributor_index].login);
+                }
+
+                //Initializing the contributors list to 0
+                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++)
+                {
+                     contributor_tally.push({
+                        'name': contributors[contributor_index],
+                        'comments': 0
+                    });
+                }
+
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=1&per_page=100',
+                    headers: {'user-agent' : 'git-technetium'},
+                    json: true
+                },function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        var re = '/pull';
+                        for (var issuesIndex = 0; issuesIndex <body.length; issuesIndex++)
+                        {
+                            if(body[issuesIndex].html_url.match(re))
+                            {
+                                for (var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
+                                    if(body[issuesIndex].user.login === contributor_tally[contributorIndex].name){
+                                        contributor_tally[contributorIndex].comments++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //issues/comments
+                    res.send(contributor_tally);
+
+                });
+                //End of second request
+            }
+            //contributors
+        });
+        //End of first request
+    });
+
 }
+
