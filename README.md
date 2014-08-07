@@ -42,6 +42,24 @@ After getting the project running, the following client-side routes are currentl
     // Returns a listing of the number of commits for each contributor for a given repository.
     127.0.0.1:8080/#/commits
 
+    // Returns a listing of all issues opened for each contributor in a repository.
+    127.0.0.1:8080/#/issues_opened
+
+    // Returns a listing of all issues assigned to each contributor in a given repository.
+    127.0.0.1:8080/#/issues_assigned
+
+    // Returns the total number of comments on issues by each contributor in a given repository.
+    127.0.0.1:8080/#/issuesComments
+
+    // Returns a listing of the lines of code added/deleted by each contributor in a given repository.
+    127.0.0.1:8080/#/loc
+
+    // Returns the total number of comments on commits for each contributor in a given repository.
+    127.0.0.1:8080/#/commitComments
+
+    // Returns the total number of pull requests by each contributor in a given repository.
+    127.0.0.1:8080/#/pulls
+
 
 Useful Libraries / Links
 ------------------------
