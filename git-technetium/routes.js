@@ -1,4 +1,4 @@
-module.exports = function(router, request) {
+module.exports = function(router, request, XMLHttpRequest) {
     // Router will handle any requests with this endpoint depending on where router is "use()'d.
     router.get('/helloworld', function(req, res) {
         // Returns a JSON response when user visits this endpoint
@@ -140,6 +140,68 @@ module.exports = function(router, request) {
     });
 
     /**
+     *  Precondition:
+     *      ownerName (string): The owner username of the target repository
+     *      repoName (string): The target repository name
+     *  Postcondition:
+     *      An array of objects, where each object contains the following properties:
+     *          name (string): The contributor username
+     *          issues_opened (string): The number of issues closed by the respective contributor
+    **/
+    router.get('/issues_closed', function(req, res) {
+        request({
+            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body) {
+            if(!error && response.statusCode === 200) {
+                var contributors = [];
+                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
+                    contributors.push(body[contributorIndex].login);
+                }
+
+                var contributorIssuesClosed = [];
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                    contributorIssuesClosed.push({
+                        'name': contributors[contributorIndex],
+                        'issues_closed': 0
+                    });
+                }
+
+                // yeah... probably not the most elegant way to do this...
+                var xmlHttp, issuesData, eventsData;
+
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open('GET', 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all', false);
+                xmlHttp.send();
+                issuesData = JSON.parse(xmlHttp.responseText);
+
+                for(var issueIndex = 0; issueIndex < issuesData.length; issueIndex++) {
+                    if(!issuesData[issueIndex].pull_request) {
+                        xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open('GET', 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + (issuesData[issueIndex].number - 1) + '/events', false);
+                        xmlHttp.send();
+                        eventsData = JSON.parse(xmlHttp.responseText);
+
+                        for(var eventIndex = eventsData.length - 1; eventIndex >= 0; eventIndex--) {
+                            if(eventsData[eventIndex].event === 'closed') {
+                                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                                    if(eventsData[eventIndex].actor.login === contributorIssuesClosed[contributorIndex].name) {
+                                        contributorIssuesClosed[contributorIndex].issues_closed++;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                res.send(contributorIssuesClosed);
+            }
+        });
+    });
+
+    /**
       * Route to query total commits per contributor within a given repository.
       * params: owner, repo
       * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
@@ -156,7 +218,7 @@ module.exports = function(router, request) {
                     contributors.push("Author: " + body[contributor_index].author.login + " , " + "Commits: " + body[contributor_index].total);
                 }
                 res.send(contributors);
-                
+
             }
         });
     });
@@ -184,7 +246,7 @@ module.exports = function(router, request) {
                     contributors.push("Author: " + body[contributor_index].author.login + " , " + "Added: " + loc_added + " , " + "Deleted: " + loc_deleted);
                 }
                 res.send(contributors);
-                
+
             }
         });
     }); // End router.get
@@ -223,7 +285,7 @@ module.exports = function(router, request) {
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
                         // Loop through each comment, check if the commenter name matches a contributor.
-                        // If match, increment commit_comments by 1. 
+                        // If match, increment commit_comments by 1.
                         for(var comment_index = 0; comment_index < body.length; comment_index++){
                             for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
                                 if(body[comment_index].user.login === contributor_comments[contributor_index].name){

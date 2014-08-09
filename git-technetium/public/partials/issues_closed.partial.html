@@ -1,0 +1,18 @@
+<form ng-submit="submitQuery()">
+    <p>
+        <strong>Repository Owner's Name: </strong><input type="text" ng-model="ownerName" required><br>
+        <strong>Repository Name: </strong><input type="text" ng-model="repoName" required><br>
+        <button type="submit">Get Issues Closed Per Contributor</button>
+    </p>
+</form>
+
+<table>
+    <tr>
+        <th>Contributor Name</th>
+        <th>Issues Closed</th>
+    </tr>
+    <tr data-ng-repeat="contributor in pageData">
+        <td>{{ contributor.name }}</td>
+        <td>{{ contributor.issues_closed }}</td>
+    </tr>
+</table>

@@ -37,6 +37,14 @@ var gitApp = angular.module('gitApp', [
                 pageTitle: 'Issues Assigned Per Contributor'
             }
         })
+        .state('issues_closed', {
+            url: '/issues_closed',
+            templateUrl: 'partials/issues_closed.partial.html',
+            controller: 'issuesClosedController',
+            data: {
+                pageTitle: 'Issues Closed Per Contributor'
+            }
+        })
         .state('commits', {
             url: '/commits',
             templateUrl: 'partials/commits.partial.html',
