@@ -1,18 +1,42 @@
-<form ng-submit="submitQuery()">
-    <p>
-        <strong>Repository Owner's Name: </strong><input type="text" ng-model="ownerName" required><br>
-        <strong>Repository Name: </strong><input type="text" ng-model="repoName" required><br>
-        <button type="submit">Get Issues Closed Per Contributor</button>
-    </p>
-</form>
+<body>
+    <div id="wrapper">
+        <!-- Include navbar and sidebar addons -->
+        <div ng-include="'partials/navbar.html'"></div>
+        <div ng-include="'partials/sidebar.html'"></div>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Issues Closed </h3>
+                            </div>
+                            <div class="panel-body">
 
-<table>
-    <tr>
-        <th>Contributor Name</th>
-        <th>Issues Closed</th>
-    </tr>
-    <tr data-ng-repeat="contributor in pageData">
-        <td>{{ contributor.name }}</td>
-        <td>{{ contributor.issues_closed }}</td>
-    </tr>
-</table>
+                            <form ng-submit="submitQuery()">
+                                <p>
+                                    <strong>Repository Owner's Name: </strong><input type="text" ng-model="ownerName" required><br>
+                                    <strong>Repository Name: </strong><input type="text" ng-model="repoName" required><br>
+                                    <button type="submit">Get Issues Closed Per Contributor</button>
+                                </p>
+                            </form>
+
+                            <table>
+                                <tr>
+                                    <th>Contributor Name</th>
+                                    <th>Issues Closed</th>
+                                </tr>
+                                <tr data-ng-repeat="contributor in pageData">
+                                    <td>{{ contributor.name }}</td>
+                                    <td>{{ contributor.issues_closed }}</td>
+                                </tr>
+                            </table>
+
+                            </div> <!-- /panel-body -->
+                        </div> <!-- /panel panel-default-->
+                    </div> <!-- /col-lg-12 -->
+                </div> <!-- /.row -->
+            </div> <!-- /container-fluid -->
+        </div> <!-- /page-wrapper-->
+    <div> <!-- /wrapper -->
+</body>
