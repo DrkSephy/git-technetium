@@ -77,6 +77,6 @@ Useful Libraries / Links
 * [D3](http://d3js.org/) - A JavaScript library for using documents as data. Useful for a wide array of graphs.
 * [PhantomJS](http://phantomjs.org/) - A headless WebKit with a JavaScript API, useful for testing with frameworks such as Mocha.
 * [Git API](https://developer.github.com/v3/) - Github API.
-* [Bitbucket API Console](http://restbrowser.bitbucket.org/) - A web console with interacting with the Bitbucket API.
+* [Bitbucket API Console](http://restbrowser.bitbucket.org/) - A web console for interacting with the Bitbucket API.
 
 
