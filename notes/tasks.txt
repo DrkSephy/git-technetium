@@ -1,7 +1,26 @@
-#########################################################
-#                   Tasks / Road map                    #
-#########################################################
+#####################################################################################
+#               Tasks / Road map (August 9th, 2014 ~ Present)                       #
+#####################################################################################
 
+With the initial set of data-gathering tasks finished, it is time to improve them.
+The following limitatations exist:
+
+* Github's API only returns 30 datasets at once. The rest can be retrieved by 
+  pagination. 
+
+* How do we chain so many requests elegantly?
+
+* We need a way to get ALL of the data for an endpoint to give proper statistics. 
+
+* Task "Number of closed issues" needs to be done asynchronously. We need an algorithm
+  for handling multiple requests on a resource. The current bug is that when trying to
+  send a request for all issue data, another request gets sent before the first is
+  done, leading to an error with the headers. 
+
+
+#####################################################################################
+#               Tasks / Road map (Project Inception ~ August 9th, 2014)             #
+#####################################################################################
 
 Project Setup: [ David ]
 ------------------------
