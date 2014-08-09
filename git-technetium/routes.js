@@ -13,7 +13,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array, where each element contains the title of an issue in the repository
     **/
@@ -38,7 +38,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array of objects, where each object contains the following properties:
      *          name (string): The contributor username
@@ -90,7 +90,7 @@ module.exports = function(router, request) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
-     *      repoName (string): The target repository name
+     *      repoName  (string): The target repository name
      *  Postcondition:
      *      An array of objects, where each object contains the following properties:
      *          name (string): The contributor username
@@ -227,10 +227,38 @@ module.exports = function(router, request) {
         });
     });
 
+    /**
+      * Route to query lines of code added/deleted per contributor within a given repository.
+      * params: owner, repo
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/stats/contributors
+    **/
+    router.get('/loc', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+            headers: { 'user-agent': 'git-technetium' },
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var loc_added = 0;
+                var loc_deleted = 0;
+                var contributors = [];
+                for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    for(var week_index = 0; week_index < body[contributor_index].weeks.length; week_index++){
+                        loc_added += body[contributor_index].weeks[week_index].a;
+                        loc_deleted += body[contributor_index].weeks[week_index].d;
+                    }
+                    contributors.push("Author: " + body[contributor_index].author.login + " , " + "Added: " + loc_added + " , " + "Deleted: " + loc_deleted);
+                }
+                res.send(contributors);
+                
+            }
+        });
+    }); // End router.get
+
      /**
       * Route to query total commit comments per contributor within a given repository.
       * params: owner, repo
-      * github api endpoint: https://api.github/com/repos/:owner/:repo/comments
+      * github api endpoint: https://api.github.com/repos/:owner/:repo/comments
     **/
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
@@ -318,7 +346,7 @@ module.exports = function(router, request) {
             if(!error && response.statusCode === 200){
                 var contributors =[];
                 var contributors_tally = {};
-                var re = '/pull/'
+                var re = '/pull/';
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++)
                 {
                     if(!body[contributor_index].html_url.match(re)){
@@ -336,4 +364,64 @@ module.exports = function(router, request) {
             }
         });
     });
+
+    /**
+     **Route to query the pull request comments  per contributor within a given repository
+     **params: ownerName, repoName
+    **/
+    router.get('/pullRequestComments', function(req, res){
+        request({
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            headers: {'user-agent' : 'git-technetium'},
+            json: true
+        }, function(error, response, body){
+            if(!error && response.statusCode === 200){
+                var contributors = [];
+                var contributor_tally =[];
+
+                //Obtaining list of contributors
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributors.push(body[contributor_index].login);
+                }
+
+                //Initializing the contributors list to 0
+                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++)
+                {
+                     contributor_tally.push({
+                        'name': contributors[contributor_index],
+                        'comments': 0
+                    });
+                }
+
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=1&per_page=100',
+                    headers: {'user-agent' : 'git-technetium'},
+                    json: true
+                },function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        var re = '/pull';
+                        for (var issuesIndex = 0; issuesIndex <body.length; issuesIndex++)
+                        {
+                            if(body[issuesIndex].html_url.match(re))
+                            {
+                                for (var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
+                                    if(body[issuesIndex].user.login === contributor_tally[contributorIndex].name){
+                                        contributor_tally[contributorIndex].comments++;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    //issues/comments
+                    res.send(contributor_tally);
+
+                });
+                //End of second request
+            }
+            //contributors
+        });
+        //End of first request
+    });
+
 }
+

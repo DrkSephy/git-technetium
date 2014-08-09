@@ -95,25 +95,25 @@ for each contributor.
 
 
 
-Lines of Code Per Contributor: [ NOT CLAIMED ]
+Lines of Code Per Contributor: [ David ]
 ----------------------------------------------
 This task involves creating a link that the user can click which will 
 return a list of the number of lines of code (addition and deletion)
 that each contributor has done for a given repository. 
 
-+ - - Create server route for querying lines of code.............................[   ]
++ - - Create server route for querying lines of code.............................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling lines of code data on client................[   ]
++ - - Create controller for handling lines of code data on client................[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying lines of code data on client.................[   ]
++ - - Create partial for displaying lines of code data on client.................[ X ]
 
 
 
-Comments for Pull Requests Per Contributor: [ Kim]
+Comments for Pull Requests Per Contributor: [ Kim ]
 -----------------------------------------------------------
 This task involves creating a link that the user can click which will
 return a list of the number of comments made for all pull requests in
@@ -202,7 +202,7 @@ a full list of all issue titles in a given repository.
 + - - Create partial for displaying all issues data on client....................[ X ]
 
 
-Frontend: [ NOT CLAIMED ]
+Frontend: [ David ]
 -------------------------
 A beautiful frontend needs to be built. Anyone can take this up at the same time,
 we can simply see which design fits this application the best.

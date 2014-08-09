@@ -53,6 +53,14 @@ var gitApp = angular.module('gitApp', [
                 pageTitle: 'Commits'
             }
         })
+        .state('loc', {
+            url: '/loc',
+            templateUrl: 'partials/loc.partial.html',
+            controller: 'locController',
+            data: {
+                pageTitle: 'Lines of Code'
+            }
+        })
         .state('commitComments', {
             url: '/commitComments',
             templateUrl: 'partials/commitComments.partial.html',
@@ -76,6 +84,13 @@ var gitApp = angular.module('gitApp', [
             data:{
                 pageTitle: 'Issues Comments'
             }
+        })
+        .state('pullRequestComments', {
+            url: '/pullRequestComments',
+            templateUrl: 'partials/pull_requestsComment.partial.html',
+            controller: 'pullRequestCommentsController',
+            data: {
+                pageTitle: 'Pull Requests Comments'
+            }
         });
-
 });
