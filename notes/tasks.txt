@@ -18,6 +18,24 @@ The following limitatations exist:
   done, leading to an error with the headers. 
 
 
+As such, the following tasks are now available:
+
+Multiple Asynchronous Requests: [ Everyone ]
+--------------------------------------------
+The major goal here is to figure out how to loop over requests for a resource without
+encountering the "headers cannot be changed once set" bug. For example, given 50
+issues, we would normally like to iterate over each issue, send a request, and 
+gather the data. Due to the asynchronous behavior of node, multiple requests get sent
+before any of them finish, throwing the "headers" error. An algorithm to solve this
+is needed.
+
++ - - Algorithm for sending multiple requests in succession.....................[   ]
+  |
+  + - Patch up the issues closed task by using the asynchronous algorithm.......[   ]
+  |
+  + - Update express.js route for handling issues closed data...................[   ]
+
+
 #####################################################################################
 #               Tasks / Road map (Project Inception ~ August 9th, 2014)             #
 #####################################################################################
