@@ -1,4 +1,4 @@
-module.exports = function(router, request) {
+module.exports = function(router, request, XMLHttpRequest) {
     // Router will handle any requests with this endpoint depending on where router is "use()'d.
     router.get('/helloworld', function(req, res) {
         // Returns a JSON response when user visits this endpoint
@@ -169,38 +169,34 @@ module.exports = function(router, request) {
                 }
 
                 // yeah... probably not the most elegant way to do this...
-                request({
-                    url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=closed',
-                    headers: { 'user-agent': 'git-technetium' },
-                    json: true
-                }, function(error, response, body) {
-                    if(!error && response.statusCode === 200) {
-                        for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
-                            if(!body[issueIndex].pull_request) {
-                                request({
-                                    url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + (body[issueIndex].number - 1) + '/events',
-                                    headers: { 'user-agent': 'git-technetium' },
-                                    json: true
-                                }, function(error, response, body) {
-                                    if(!error && response.statusCode === 200) {
-                                        for(var eventIndex = body.length - 1; eventIndex >= 0; eventIndex--) {
-                                            if(body[eventIndex].event === 'closed') {
-                                                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
-                                                    if(body[eventIndex].actor.login === contributorIssuesClosed[contributorIndex].name) {
-                                                        contributorIssuesClosed[contributorIndex].issues_closed++;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                        }
+                var xmlHttp, issuesData, eventsData;
 
-                                        res.send(contributorIssuesClosed);
+                xmlHttp = new XMLHttpRequest();
+                xmlHttp.open('GET', 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all', false);
+                xmlHttp.send();
+                issuesData = JSON.parse(xmlHttp.responseText);
+
+                for(var issueIndex = 0; issueIndex < issuesData.length; issueIndex++) {
+                    if(!issuesData[issueIndex].pull_request) {
+                        xmlHttp = new XMLHttpRequest();
+                        xmlHttp.open('GET', 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + (issuesData[issueIndex].number - 1) + '/events', false);
+                        xmlHttp.send();
+                        eventsData = JSON.parse(xmlHttp.responseText);
+
+                        for(var eventIndex = eventsData.length - 1; eventIndex >= 0; eventIndex--) {
+                            if(eventsData[eventIndex].event === 'closed') {
+                                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                                    if(eventsData[eventIndex].actor.login === contributorIssuesClosed[contributorIndex].name) {
+                                        contributorIssuesClosed[contributorIndex].issues_closed++;
+                                        break;
                                     }
-                                });
+                                }
                             }
                         }
                     }
-                });
+                }
+
+                res.send(contributorIssuesClosed);
             }
         });
     });
@@ -250,7 +246,7 @@ module.exports = function(router, request) {
                     contributors.push("Author: " + body[contributor_index].author.login + " , " + "Added: " + loc_added + " , " + "Deleted: " + loc_deleted);
                 }
                 res.send(contributors);
-                
+
             }
         });
     }); // End router.get
