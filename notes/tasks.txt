@@ -36,6 +36,33 @@ is needed.
   + - Update express.js route for handling issues closed data...................[   ]
 
 
+Getting all Data for Resource: [ Everyone ]
+-------------------------------------------
+Once the above task is finished, anyone who completed a task for gathering data has
+to go back and update their routes to get ALL data associated with that endpoint.
+This way, our results will reflect that of the entire repository, not just a subset
+of 30 datasets. 
+
++ - - Update Commits per Contributor route to get all data......................[ X ]
+|
++ - - Update Commit Comments per Contributor route to get all data..............[   ]
+|
++ - - Update Issue Comments per Contributor route to get all data...............[   ]
+|
++ - - Update Pull Requests per Contributor route to get all data................[   ]
+|
++ - - Update Lines of Code per Contributor route to get all data................[ X ]
+|
++ - - Update Pull Request Comments per Contributor route to get all data........[   ]
+|
++ - - Update Number of Issues Opened per Contributor route to get all data......[   ]
+|
++ - - Update Number of Issues Assigned per Contributor route to get all data....[   ]
+|
++ - - Update Number of Issues Closed per Contributor route to get all data......[   ]
+|
++ - - Update Issues for Repository route to get all issue data..................[   ]
+
 #####################################################################################
 #               Tasks / Road map (Project Inception ~ August 9th, 2014)             #
 #####################################################################################
