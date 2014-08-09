@@ -48,6 +48,9 @@ After getting the project running, the following client-side routes are currentl
     // Returns a listing of all issues assigned to each contributor in a given repository.
     127.0.0.1:8080/#/issues_assigned
 
+    // Returns a listing of all issues closed by each contributor in a given repository.
+    127.0.0.1:8080/#/issues_closed
+
     // Returns the total number of comments on issues by each contributor in a given repository.
     127.0.0.1:8080/#/issuesComments
 
