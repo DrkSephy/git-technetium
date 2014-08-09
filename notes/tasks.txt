@@ -119,15 +119,15 @@ This task involves creating a link that the user can click which will
 return a list of the number of comments made for all pull requests in
 a given repository for all contributors.
 
-+ - - Create server route for querying pull request comments.....................[   ]
++ - - Create server route for querying pull request comments.....................[ X ]
 |     |
-|     + - - Parse data before sending to client..................................[   ]
+|     + - - Parse data before sending to client..................................[ X ]
 |
-+ - - Create controller for handling pull request comments data on client........[   ]
++ - - Create controller for handling pull request comments data on client........[ X ]
 | 
-+ - - Create factory for getting data on client from server......................[   ]
++ - - Create factory for getting data on client from server......................[ X ]
 |
-+ - - Create partial for displaying pull request comments data on client.........[   ]
++ - - Create partial for displaying pull request comments data on client.........[ X ]
 
 
 
