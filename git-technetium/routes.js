@@ -335,30 +335,53 @@ module.exports = function(router, request, XMLHttpRequest) {
     **/
     router.get('/issuesComments', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/' + 'issues/comments',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: {'user-agent' : 'git-technetium'},
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
-                var contributors =[];
-                var contributors_tally = {};
-                var re = '/pull/';
-                for (var contributor_index = 0; contributor_index < body.length; contributor_index++)
-                {
-                    if(!body[contributor_index].html_url.match(re)){
-                        if(contributors.indexOf(body[contributor_index].user.login)<0){
-                            contributors.push(body[contributor_index].user.login);
-                            contributors_tally[body[contributor_index].user.login] = 1;
-                        }
-                        else{
-                            contributors_tally[body[contributor_index].user.login]++;
-                        }
-                    }
+                var contributors = [];
+                var contributor_tally =[];
 
+                //Obtaining list of contributors
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributors.push(body[contributor_index].login);
                 }
-                res.send(contributors_tally);
+
+                //Initializing the contributors list to 0
+                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++)
+                {
+                     contributor_tally.push({
+                        'name': contributors[contributor_index],
+                        'comments': 0
+                    });
+                }
+
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments',
+                    headers: {'user-agent' : 'git-technetium'},
+                    json: true                    
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        var re = '/pull';
+                        for (var issuesIndex = 0; issuesIndex <body.length; issuesIndex++)
+                        {
+                            if(!body[issuesIndex].html_url.match(re))
+                            {
+                                for (var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
+                                    if(body[issuesIndex].user.login === contributor_tally[contributorIndex].name){
+                                        contributor_tally[contributorIndex].comments++;
+                                    }
+                                }
+                            }
+                        }                        
+                    }
+                    res.send(contributor_tally);
+                });
+                //End of second request   
             }
         });
+        //End of first request
     });
 
     /**
