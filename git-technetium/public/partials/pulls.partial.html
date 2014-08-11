@@ -23,9 +23,9 @@
 
 
                                 <table>
-                                	<tr data-ng-repeat="(user,total) in pageData">
-                                		<td>{{user}}</td>
-                                		<td>{{total}}</td>
+                                	<tr data-ng-repeat="user in pageData">
+                                		<td>{{user.name}}</td>
+                                		<td>{{user.total}}</td>
                                 	</tr>
                                 </table>
 
