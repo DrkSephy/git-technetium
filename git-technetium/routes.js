@@ -306,27 +306,49 @@ module.exports = function(router, request, XMLHttpRequest) {
     **/
     router.get('/pulls', function(req, res){
         request({
-            url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/' + "pulls?state=closed",
-            //url: 'https://api.github.com/repos/DrkSephy/git-technetium/pulls?state=closed',
+            url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/contributors',
             headers: {'user-agent' : 'git-technetium'},
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
-                var contributors=[];
-                var contributors_tally={};
-                for(var contributor_index = 0; contributor_index< body.length; contributor_index++){
-                    if (contributors.indexOf(body[contributor_index].user.login) < 0){
-                        contributors.push(body[contributor_index].user.login);
-                        contributors_tally[body[contributor_index].user.login] = 1;
-                    }
-                    else
-                    {
-                        contributors_tally[body[contributor_index].user.login]++;
-                    }
+                var contributors =[];
+                var contributor_tally =[];
+
+                //Obtaining list of contributors
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributors.push(body[contributor_index].login);
                 }
-                res.send(contributors_tally);
+
+                //Initializing the contributors list to 0
+                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
+                    contributor_tally.push({
+                        'name' : contributors[contributor_index],
+                        'total': 0
+                    });
+                }
+
+                request({
+                    url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/pulls?state=closed',
+                    headers: {'user-agent' : 'git-technetium'},
+                    json: true
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        for (var pullsIndex = 0; pullsIndex < body.length; pullsIndex++){
+                            for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                if(body[pullsIndex].user.login === contributor_tally[contributorIndex].name){
+                                    contributor_tally[contributorIndex].total++;
+                                }
+                            }
+                        }
+                    }
+                    res.send(contributor_tally);
+                    //end of second if
+                });
+                //End of second request
             }
+            //end of IF
         });
+        //End of first request
     });
 
     /**

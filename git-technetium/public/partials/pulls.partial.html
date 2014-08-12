@@ -23,9 +23,14 @@
 
 
                                 <table>
-                                	<tr data-ng-repeat="(user,total) in pageData">
-                                		<td>{{user}}</td>
-                                		<td>{{total}}</td>
+                                    <tr ng-if="pageData"> 
+                                        <td><strong>User</strong></td>
+                                        <td><strong>Total Pull Requests</strong></td>
+                                    </tr>
+
+                                	<tr data-ng-repeat="user in pageData">
+                                		<td>{{user.name}}</td>
+                                		<td>{{user.total}}</td>
                                 	</tr>
                                 </table>
 
