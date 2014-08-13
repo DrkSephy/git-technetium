@@ -159,7 +159,7 @@ module.exports = function(router, request, XMLHttpRequest) {
                 for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
                     contributors.push(body[contributorIndex].login);
                 }
-
+ 
                 var contributorIssuesClosed = [];
                 for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                     contributorIssuesClosed.push({
@@ -167,11 +167,11 @@ module.exports = function(router, request, XMLHttpRequest) {
                         'issues_closed': 0
                     });
                 }
-
+ 
                 // An array to store all the issue numbers that we need to get events for. This will only contain issues that 
                 // are not generated from pull requests.
-                var issueNumbers = [ ]
-
+                var issueNumbers = [ ];
+ 
                 request({
                     url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=closed',
                     headers: { 'user-agent': 'git-technetium' },
@@ -188,41 +188,44 @@ module.exports = function(router, request, XMLHttpRequest) {
                         
                         // We need async here.
                         var async = require('async');
+
                         // For each Issue Number inside of the issueNumbers array, we want to send a request to get that issue's events.
                         // async.each will apply the request function for each item inside the issueNumbers array.
                         async.each(issueNumbers, function(number, callback) {
-                              console.log(issueNumbers.indexOf(number) < issueNumbers.length);
                               request({
                                 url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + number + '/events',
                                 headers: { 'user-agent' : 'git-technetium' },
                                 json: true
                               }, function(error, response, body){
                                    if(!error && response.statusCode === 200){
-                                    for(var eventData = 0; eventData < body.length; eventData++){
+                                    for(var eventData = 0; eventData < body.length; eventData++)
+                                    {
                                         if(body[eventData].event === 'closed'){
                                             for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                                                 if(body[eventData].actor.login === contributorIssuesClosed[contributorIndex].name){
                                                     contributorIssuesClosed[contributorIndex].issues_closed++;
-
+ 
                                                     
                                                 }
-                                            } // end inner for loop
 
+                                            }
+                                             // end inner for loop
+ 
                                             // If we have processed all the requests, we send a callback with the data attached.  
                                             // According to the documentation, if you send callback() with anything inside,
                                             // it gets reported as an error. Conveniently, we can use this to our advantage.
                                             // When all requests are done, send the data through a callback to access it at 
                                             // the end, and send it up to the server. 
-                                            if(issueNumbers.indexOf(number) === issueNumbers.length - 1){
-                                                callback({data: contributorIssuesClosed});
-                                            }
                                         } // end if
                                     } // end outer for loop
                                    } // end if
-
-
+                                     if(issueNumbers.indexOf(number) === issueNumbers.length - 1){
+                                        callback({data: contributorIssuesClosed});
+                                    }
+ 
                                 }) // end request
                         
+
                         }, function(err){
                             // 
                             if( err ) {
@@ -230,15 +233,15 @@ module.exports = function(router, request, XMLHttpRequest) {
                               res.send(err.data);
                             } else {
                               console.log("Done");
-
+ 
                             }
                         });
-
+ 
                     }
                     // Right now, this is just the numbers of the issue we want to get events from. This is filler data.
                     //res.send(issueNumbers);
                 }); // end second request
-
+ 
             } // end first request if statement
         }); // end first request 
     }); // end router.get
