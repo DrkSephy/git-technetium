@@ -132,25 +132,33 @@ module.exports = function(router, request, async) {
                     });
                 }
 
-                request({
-                    url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
-                    headers: { 'user-agent': 'git-technetium' },
-                    json: true
-                }, function(error, response, body) {
-                    if(!error && response.statusCode === 200) {
-                        for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
-                            if(!body[issueIndex].pull_request) {
-                                for(var contributorIndex = 0; contributorIndex < contributorIssuesAssigned.length; contributorIndex++) {
-                                    if(body[issueIndex].assignee && body[issueIndex].assignee.login === contributorIssuesAssigned[contributorIndex].name) {
-                                        contributorIssuesAssigned[contributorIndex].issues_assigned++;
-                                    }
+                var json = [];
+                var pageCounter = 1; 
+
+                var getData = function(pageCounter){
+                    request({
+                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all&page=' + pageCounter,
+                        headers: { 'user-agent': 'git-technetium' },
+                        json: true
+                    }, function(error, response, body) {
+                        if(!error && response.statusCode === 200) {
+                            for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
+                                if(!body[issueIndex].pull_request) {
+                                    json.push(body[issueIndex]);
                                 }
                             }
+                            if(body.length < 30){
+                                res.send(json);
+                            } else{
+                                getData(pageCounter + 1);
+                            }
                         }
+                    }); // end request
+                }
+                getData(1);
 
-                        res.send(contributorIssuesAssigned);
-                    }
-                });
+
+
             }
         });
     });
