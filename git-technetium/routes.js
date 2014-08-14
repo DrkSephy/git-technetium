@@ -148,7 +148,14 @@ module.exports = function(router, request, async) {
                                 }
                             }
                             if(body.length < 30){
-                                res.send(json);
+                                for(var issueIndex = 0; issueIndex < json.length; issueIndex++){
+                                    for(var contributorIndex = 0; contributorIndex < contributorIssuesAssigned.length; contributorIndex++){
+                                        if(json[issueIndex].assignee && json[issueIndex].assignee.login === contributorIssuesAssigned[contributorIndex].name){
+                                            contributorIssuesAssigned[contributorIndex].issues_assigned++;
+                                        }
+                                    }
+                                }
+                                res.send(contributorIssuesAssigned);
                             } else{
                                 getData(pageCounter + 1);
                             }
@@ -156,9 +163,6 @@ module.exports = function(router, request, async) {
                     }); // end request
                 }
                 getData(1);
-
-
-
             }
         });
     });

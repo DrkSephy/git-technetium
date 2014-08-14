@@ -22,7 +22,14 @@
                                 </form>
 
                                 <table>
-                                    {{ pageData }}
+                                    <tr>
+                                        <th>Contributor Name</th>
+                                        <th>Issues Assigned</th>
+                                    </tr>
+                                    <tr data-ng-repeat="contributor in pageData">
+                                        <td>{{ contributor.name }}</td>
+                                        <td>{{ contributor.issues_assigned }}</td>
+                                    </tr>
                                 </table>
 
 
