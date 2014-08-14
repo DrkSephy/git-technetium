@@ -430,44 +430,53 @@ module.exports = function(router, request, async) {
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-                var contributor_tally =[];
-
                 //Obtaining list of contributors
-                for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
-                    contributors.push(body[contributor_index].login);
+                for (var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
+                    contributors.push(body[contributorIndex].login);
                 }
 
+                var contributor_tally =[];
                 //Initializing the contributors list to 0
-                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++)
-                {
+                for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                      contributor_tally.push({
-                        'name': contributors[contributor_index],
+                        'name': contributors[contributorIndex],
                         'comments': 0
                     });
                 }
 
-                request({
-                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments',
-                    headers: {'user-agent' : 'git-technetium'},
-                    json: true                    
-                }, function(error, response, body){
-                    if(!error && response.statusCode === 200){
-                        var re = '/pull';
-                        for (var issuesIndex = 0; issuesIndex <body.length; issuesIndex++)
-                        {
-                            if(!body[issuesIndex].html_url.match(re))
-                            {
-                                for (var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
-                                    if(body[issuesIndex].user.login === contributor_tally[contributorIndex].name){
-                                        contributor_tally[contributorIndex].comments++;
+                var json = [];
+                var pageCounter = 1;
+
+                var getData = function(pageCounter){
+                    request({
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?page=' + pageCounter,
+                        headers: {'user-agent' : 'git-technetium'},
+                        json: true                    
+                    }, function(error, response, body){
+                        if(!error && response.statusCode === 200){
+                            var re = '/pull';
+                            for (var issuesIndex = 0; issuesIndex < body.length; issuesIndex++){
+                                if(!body[issuesIndex].html_url.match(re)){
+                                    json.push(body[issuesIndex]);
+                                }
+                            }   
+                            if(body.length < 30){
+                                for(var issuesIndex = 0; issuesIndex < json.length; issuesIndex++){
+                                    for(var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
+                                        if(json[issuesIndex].user.login === contributor_tally[contributorIndex].name){
+                                            contributor_tally[contributorIndex].comments++;
+                                            console.log(contributor_tally);
+                                        }
                                     }
                                 }
-                            }
-                        }                        
-                    }
-                    res.send(contributor_tally);
-                });
-                //End of second request   
+                                res.send(contributor_tally);
+                            } else {
+                                getData(pageCounter + 1);
+                            }                     
+                        }
+                    }); //End of second request   
+                }
+                getData(1);
             }
         });
         //End of first request
