@@ -384,7 +384,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
         request({
-            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' +  req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){
