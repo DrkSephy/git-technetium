@@ -4,7 +4,7 @@ gitApp.controller('issuesAssignedController', function($scope, issuesAssignedFac
     $scope.pageData = [];
 
     $scope.submitQuery = function() {
-        $scope.pageData = issuesAssignedFactory.get($scope.ownerName, $scope.repoName).success(function(data) {
+        $scope.pageData = issuesAssignedFactory.get($scope.owner, $scope.repo).success(function(data) {
             $scope.pageData = data;
         });
     }
