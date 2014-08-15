@@ -9,8 +9,11 @@ var app = express();
 // Get an instance of the Express Router
 var router = express.Router();
 
+var CLIENT_ID = '';
+var CLIENT_SECRET = '';
+
 // Register routes of Router
-require('./routes')(router, request, async);
+require('./routes')(router, request, async, CLIENT_ID, CLIENT_SECRET);
 
 // Prefix all routes with /api
 app.use('/api', router);
