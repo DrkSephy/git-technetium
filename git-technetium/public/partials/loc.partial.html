@@ -21,7 +21,18 @@
                                     </p>
                                 </form>
 
-                                {{ pageData }}
+                                <table>
+                                    <tr>
+                                        <th>Contributor Name</th>
+                                        <th>Lines of Code Added</th>
+                                        <th>Lines of Code Deleted</th>
+                                    </tr>
+                                    <tr data-ng-repeat="contributor in pageData">
+                                        <td>{{ contributor.name }}</td>
+                                        <td>{{ contributor.loc_added }}</td>
+                                        <td>{{ contributor.loc_deleted }}</td>
+                                    </tr>
+                                </table>
 
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->
