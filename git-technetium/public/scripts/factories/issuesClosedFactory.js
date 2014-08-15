@@ -6,13 +6,13 @@
 
 gitApp.factory('issuesClosedFactory', function($http) {
     return {
-        get: function(ownerName, repoName) {
+        get: function(owner, repo) {
             return $http({
                 url: '/api/issues_closed',
                 method: 'GET',
                 params: {
-                    ownerName: ownerName,
-                    repoName: repoName
+                    owner: owner,
+                    repo: repo
                 }
             });
         }
