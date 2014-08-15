@@ -19,7 +19,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -46,7 +46,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_opened', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -70,7 +70,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all&page=' + pageCounter,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body) {
@@ -114,7 +114,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_assigned', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -137,7 +137,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all&page=' + pageCounter,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body) {
@@ -178,7 +178,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_closed', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -212,7 +212,7 @@ module.exports = function(router, request, async) {
                 */
                 var getData = function(pageCounter) {
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=closed&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=closed&page=' + pageCounter,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body){
@@ -231,7 +231,7 @@ module.exports = function(router, request, async) {
                                 // async.each will apply the request function for each item inside the issueNumbers array.
                                 async.each(issueNumbers, function(number, callback) {
                                       request({
-                                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + number + '/events',
+                                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/' + number + '/events',
                                         headers: { 'user-agent' : 'git-technetium' },
                                         json: true
                                       }, function(error, response, body){
