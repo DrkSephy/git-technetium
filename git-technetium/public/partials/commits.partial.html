@@ -20,7 +20,17 @@
                                     </p>
                                 </form>
 
-                                {{ pageData }}
+                                <table>
+                                    <tr>
+                                        <th>Contributor Name</th>
+                                        <th>Commits</th>
+                                        
+                                    </tr>
+                                    <tr data-ng-repeat="contributor in pageData">
+                                        <td>{{ contributor.name }}</td>
+                                        <td>{{ contributor.commits }}</td>
+                                    </tr>
+                                </table>
 
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->
