@@ -418,24 +418,35 @@ module.exports = function(router, request, async) {
                     });
                 }
 
-                request({
-                    url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/pulls?state=closed',
-                    headers: {'user-agent' : 'git-technetium'},
-                    json: true
-                }, function(error, response, body){
-                    if(!error && response.statusCode === 200){
-                        for (var pullsIndex = 0; pullsIndex < body.length; pullsIndex++){
-                            for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
-                                if(body[pullsIndex].user.login === contributor_tally[contributorIndex].name){
-                                    contributor_tally[contributorIndex].total++;
-                                }
+                var json = [];
+                var pageCounter = 1;
+                var getData = function(pageCounter){
+                    request({
+                        url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/pulls?state=closed&page=' + pageCounter,
+                        headers: {'user-agent' : 'git-technetium'},
+                        json: true
+                    }, function(error, response, body){
+                        if(!error && response.statusCode === 200){
+                            for (var pullsIndex = 0; pullsIndex < body.length; pullsIndex++){
+                                json.push(body[pullsIndex]);
                             }
+                            if(body.length < 30){
+                                for(var pullsIndex = 0; pullsIndex < json.length; pullsIndex++){
+                                    for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                        if(json[pullsIndex].user.login === contributor_tally[contributorIndex].name){
+                                            contributor_tally[contributorIndex].total++;
+                                        }
+                                    }
+                                }
+                                res.send(contributor_tally);
+                            } else {
+                                getData(pageCounter + 1);
+                            }
+
                         }
-                    }
-                    res.send(contributor_tally);
-                    //end of second if
-                });
-                //End of second request
+                    }); //End of second request
+                }
+                getData(1);
             }
             //end of IF
         });
