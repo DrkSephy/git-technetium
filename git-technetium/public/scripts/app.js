@@ -13,6 +13,14 @@ var gitApp = angular.module('gitApp', [
                 pageTitle: 'Hello'
             }
         })
+        .state('reports', {
+            url: '/reports',
+            templateUrl: 'partials/report.partial.html',
+            controller: 'reportController',
+            data: {
+                pageTitle: 'Reports'
+            }
+        })
         .state('issues', {
             url: '/issues',
             templateUrl: 'partials/issues.partial.html',
