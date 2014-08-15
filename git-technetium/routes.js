@@ -357,24 +357,36 @@ module.exports = function(router, request, async) {
                     };
                 }
 
-                request({
-                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments',
-                    headers: { 'user-agent' : 'git-technetium' },
-                    json: true
-                }, function(error, response, body){
-                    if(!error && response.statusCode === 200){
-                        // Loop through each comment, check if the commenter name matches a contributor.
-                        // If match, increment commit_comments by 1.
-                        for(var comment_index = 0; comment_index < body.length; comment_index++){
-                            for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
-                                if(body[comment_index].user.login === contributor_comments[contributor_index].name){
-                                    contributor_comments[contributor_index].commit_comments++;
+                var json = [];
+                var pageCounter = 1;
+
+                var getData = function(pageCounter){
+                    request({
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments?page=' + pageCounter,
+                        headers: { 'user-agent' : 'git-technetium' },
+                        json: true
+                    }, function(error, response, body){
+                        if(!error && response.statusCode === 200){
+                            for(var comment_index = 0; comment_index < body.length; comment_index++){
+                                json.push(body[comment_index]);
+                            }
+                            if(body.length < 30){
+                                for(var commentIndex = 0; commentIndex < json.length; commentIndex++){
+                                    for(var contributorIndex = 0; contributorIndex < contributor_comments.length; contributorIndex++){
+                                        if(json[commentIndex].user.login === contributor_comments[contributorIndex].name){
+                                            contributor_comments[contributorIndex].commit_comments++;
+                                        }
+                                    }
                                 }
+                                res.send(contributor_comments);
+                            } else {
+                                getData(pageCounter + 1);
                             }
                         }
-                        res.send(contributor_comments)
-                    }
-                }); // End second request function
+                    }); // End second request function
+                }
+                getData(1);
+
             }
         }); // End first request function
     });
