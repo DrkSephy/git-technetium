@@ -21,17 +21,24 @@
                                     </p>
                                 </form>
 
-                                <table>
-                                    <tr>
-                                        <th>Contributor Name</th>
-                                        <th>Issues Opened</th>
-                                    </tr>
-                                    <tr data-ng-repeat="contributor in pageData">
-                                        <td>{{ contributor.name }}</td>
-                                        <td>{{ contributor.issues_opened }}</td>
-                                    </tr>
-                                </table>
-
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped tablesorter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="header">Contributor Name</th>
+                                                    <th class="header">Issues Opened</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="contributor in pageData">
+                                                    <td>{{ contributor.name }}</td>
+                                                    <td>{{ contributor.issues_opened }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->
