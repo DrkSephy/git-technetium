@@ -309,23 +309,52 @@ module.exports = function(router, request, async) {
     **/
     router.get('/loc', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
-            headers: { 'user-agent': 'git-technetium' },
+            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
+            headers: { 'user-agent': 'git-technetium'},
             json: true
+
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
-                var loc_added = 0;
-                var loc_deleted = 0;
                 var contributors = [];
-                for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
-                    for(var week_index = 0; week_index < body[contributor_index].weeks.length; week_index++){
-                        loc_added += body[contributor_index].weeks[week_index].a;
-                        loc_deleted += body[contributor_index].weeks[week_index].d;
-                    }
-                    contributors.push("Author: " + body[contributor_index].author.login + " , " + "Added: " + loc_added + " , " + "Deleted: " + loc_deleted);
-                }
-                res.send(contributors);
 
+                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
+                    contributors.push(body[contributorIndex].login);
+                }
+
+                var contributor_loc = [];
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                    contributor_loc[contributorIndex] = {
+                        'name': contributors[contributorIndex],
+                        'loc_added': 0,
+                        'loc_deleted': 0,
+                    };
+                }
+               
+
+
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+                    headers: { 'user-agent': 'git-technetium' },
+                    json: true
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        // loop through all data
+                        for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
+                            for(var weekIndex = 0; weekIndex < body[dataIndex].weeks.length; weekIndex++){
+                                //console.log(body[dataIndex].weeks[weekIndex]);
+                                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                    if(body[dataIndex].author.login === contributor_loc[contributorIndex].name){
+                                        contributor_loc[contributorIndex].loc_added += body[dataIndex].weeks[weekIndex].a;
+                                        contributor_loc[contributorIndex].loc_deleted += body[dataIndex].weeks[weekIndex].d;
+                                    }
+                                }
+
+                            }
+                        }
+                        res.send(contributor_loc);
+
+                    }
+                });
             }
         });
     }); // End router.get
