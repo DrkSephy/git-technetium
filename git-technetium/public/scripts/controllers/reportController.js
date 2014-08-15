@@ -17,7 +17,6 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
     $scope.submitQuery = function(){
         $scope.commitData = commitsFactory.get($scope.owner, $scope.repo).success(function(data){
             $scope.commitData = data;
-            console.log($scope.commitData);
         })
 
         $scope.locData = locFactory.get($scope.owner, $scope.repo).success(function(data){

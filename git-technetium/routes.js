@@ -92,14 +92,11 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             } else{
                                 getData(pageCounter + 1);
                             }
-                            //res.send(urls);
                         }
-                    }); // end request
-                } // end getData function call
+                    }); 
+                } 
                 getData(1);
-
-
-            }
+           }
         });
     });
 
@@ -160,7 +157,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // end request
+                    });
                 }
                 getData(1);
             }
@@ -242,11 +239,10 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                                             if(body[eventData].actor.login === contributorIssuesClosed[contributorIndex].name){
                                                                 contributorIssuesClosed[contributorIndex].issues_closed++;
                                                             }
-                                                        }// end inner for loop
-         
-                                                    } // end if
-                                                } // end outer for loop
-                                           } // end if
+                                                        }
+                                                    } 
+                                                }
+                                           }
 
                                             // If we have processed all the requests, we send a callback with the data attached.  
                                             // According to the documentation, if you send callback() with anything inside,
@@ -257,7 +253,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                                 callback({data: contributorIssuesClosed});
                                             }
          
-                                        }) // end request
+                                        })
                                     }, function(err){
                                     // We can access the data processed by async.each through the error callback. 
                                     if( err ) {
@@ -272,13 +268,12 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // end second request
-                }
-                // Call function to get all data. 
+                    }); 
+                } 
                 getData(1);
-            } // end first request if statement
-        }); // end first request 
-    }); // end router.get
+            } 
+        });
+    });
 
     /**
       * Route to query total commits per contributor within a given repository.
@@ -313,7 +308,6 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                     json: true
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
-                        // loop through all data
                         for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
                             for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                                 if(body[dataIndex].author.login === contributor_commits[contributorIndex].name){
@@ -363,10 +357,8 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                     json: true
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
-                        // loop through all data
                         for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
                             for(var weekIndex = 0; weekIndex < body[dataIndex].weeks.length; weekIndex++){
-                                //console.log(body[dataIndex].weeks[weekIndex]);
                                 for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                                     if(body[dataIndex].author.login === contributor_loc[contributorIndex].name){
                                         contributor_loc[contributorIndex].loc_added += body[dataIndex].weeks[weekIndex].a;
@@ -382,7 +374,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                 });
             }
         });
-    }); // End router.get
+    }); 
 
      /**
       * Route to query total commit comments per contributor within a given repository.
@@ -437,12 +429,12 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // End second request function
+                    }); 
                 }
                 getData(1);
 
             }
-        }); // End first request function
+        }); 
     });
 
     /**
@@ -457,14 +449,13 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors =[];
-                var contributor_tally =[];
 
-                //Obtaining list of contributors
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
 
-                //Initializing the contributors list to 0
+                var contributor_tally =[];
+
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributor_tally.push({
                         'name' : contributors[contributor_index],
@@ -498,13 +489,11 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
 
                         }
-                    }); //End of second request
+                    }); 
                 }
                 getData(1);
             }
-            //end of IF
         });
-        //End of first request
     });
 
     /**
@@ -519,13 +508,13 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-                //Obtaining list of contributors
+
                 for (var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributor_tally =[];
-                //Initializing the contributors list to 0
+
                 for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
@@ -554,7 +543,6 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                     for(var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
                                         if(json[issuesIndex].user.login === contributor_tally[contributorIndex].name){
                                             contributor_tally[contributorIndex].comments++;
-                                            console.log(contributor_tally);
                                         }
                                     }
                                 }
@@ -563,12 +551,11 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                 getData(pageCounter + 1);
                             }                     
                         }
-                    }); //End of second request   
+                    }); 
                 }
                 getData(1);
             }
         });
-        //End of first request
     });
 
     /**
@@ -584,13 +571,13 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
             if(!error && response.statusCode === 200){
                 
                 var contributors = [];
-                //Obtaining list of contributors
+            
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
 
                 var contributor_tally =[];
-                //Initializing the contributors list to 0
+           
                 for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
                      contributor_tally.push({
                         'name': contributors[contributor_index],
@@ -628,13 +615,12 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
 
-                    }); //End of second request
+                    }); 
                 }
                 getData(1);
 
-            } //contributors
-        }); //End of first request
+            } 
+        }); 
     });
-
 }
 

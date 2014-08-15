@@ -1,5 +1,3 @@
-// Factory for getting commit comment data for a repository.
-
 'use strict';
 
 gitApp.factory('commitCommentsFactory', function($http){

@@ -1,7 +1,3 @@
-/**
- *  Factory for getting the number of opened issues per contributor in a repository.
- */
-
 'use strict';
 
 gitApp.factory('issuesOpenedFactory', function($http) {

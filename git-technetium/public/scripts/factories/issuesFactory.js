@@ -1,7 +1,3 @@
-/**
- *  Factory for getting issue titles in a repository.
- */
-
 'use strict';
 
 gitApp.factory('issuesFactory', function($http) {
