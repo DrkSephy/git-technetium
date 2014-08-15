@@ -21,7 +21,16 @@
                                 </p>
                             </form>
 
-                            {{ pageData }}
+                                <table>
+                                    <tr>
+                                        <th>Contributor Name</th>
+                                        <th>Commit Comments</th>
+                                    </tr>
+                                    <tr data-ng-repeat="contributor in pageData">
+                                        <td>{{ contributor.name }}</td>
+                                        <td>{{ contributor.commit_comments }}</td>
+                                    </tr>
+                                </table>
                            
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->
