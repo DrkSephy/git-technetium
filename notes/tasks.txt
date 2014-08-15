@@ -45,9 +45,9 @@ of 30 datasets.
 
 + - - Update Commits per Contributor route to get all data......................[ X ]
 |
-+ - - Update Commit Comments per Contributor route to get all data..............[   ]
++ - - Update Commit Comments per Contributor route to get all data..............[ X ]
 |
-+ - - Update Issue Comments per Contributor route to get all data...............[   ]
++ - - Update Issue Comments per Contributor route to get all data...............[ X ]
 |
 + - - Update Pull Requests per Contributor route to get all data................[   ]
 |
@@ -55,9 +55,9 @@ of 30 datasets.
 |
 + - - Update Pull Request Comments per Contributor route to get all data........[   ]
 |
-+ - - Update Number of Issues Opened per Contributor route to get all data......[   ]
++ - - Update Number of Issues Opened per Contributor route to get all data......[ X ]
 |
-+ - - Update Number of Issues Assigned per Contributor route to get all data....[   ]
++ - - Update Number of Issues Assigned per Contributor route to get all data....[ X ]
 |
 + - - Update Number of Issues Closed per Contributor route to get all data......[ X ]
 |
