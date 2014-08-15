@@ -287,17 +287,44 @@ module.exports = function(router, request, async) {
     **/
     router.get('/commits', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
-            headers: { 'user-agent': 'git-technetium' },
+            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
+            headers: { 'user-agent': 'git-technetium'},
             json: true
+
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-                for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
-                    contributors.push("Author: " + body[contributor_index].author.login + " , " + "Commits: " + body[contributor_index].total);
-                }
-                res.send(contributors);
 
+                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
+                    contributors.push(body[contributorIndex].login);
+                }
+
+                var contributor_commits = [];
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                    contributor_commits[contributorIndex] = {
+                        'name': contributors[contributorIndex],
+                        'commits': 0
+                    };
+                }
+               
+                request({
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+                    headers: { 'user-agent': 'git-technetium' },
+                    json: true
+                }, function(error, response, body){
+                    if(!error && response.statusCode === 200){
+                        // loop through all data
+                        for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
+                            for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                if(body[dataIndex].author.login === contributor_commits[contributorIndex].name){
+                                    contributor_commits[contributorIndex].commits += body[dataIndex].total;
+                                }
+                            }
+                        }
+                        res.send(contributor_commits);
+
+                    }
+                });
             }
         });
     });
@@ -330,8 +357,6 @@ module.exports = function(router, request, async) {
                     };
                 }
                
-
-
                 request({
                     url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
                     headers: { 'user-agent': 'git-technetium' },
