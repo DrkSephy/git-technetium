@@ -517,51 +517,58 @@ module.exports = function(router, request, async) {
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
+                
                 var contributors = [];
-                var contributor_tally =[];
-
                 //Obtaining list of contributors
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
 
+                var contributor_tally =[];
                 //Initializing the contributors list to 0
-                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++)
-                {
+                for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
                      contributor_tally.push({
                         'name': contributors[contributor_index],
                         'comments': 0
                     });
                 }
 
-                request({
-                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=1&per_page=100',
-                    headers: {'user-agent' : 'git-technetium'},
-                    json: true
-                },function(error, response, body){
-                    if(!error && response.statusCode === 200){
-                        var re = '/pull';
-                        for (var issuesIndex = 0; issuesIndex <body.length; issuesIndex++)
-                        {
-                            if(body[issuesIndex].html_url.match(re))
-                            {
-                                for (var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
-                                    if(body[issuesIndex].user.login === contributor_tally[contributorIndex].name){
-                                        contributor_tally[contributorIndex].comments++;
-                                    }
+                var json = [];
+                var pageCounter = 1;
+
+                var getData = function(pageCounter){
+                    request({
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=' + pageCounter,
+                        headers: {'user-agent' : 'git-technetium'},
+                        json: true
+                    },function(error, response, body){
+                        if(!error && response.statusCode === 200){
+                            var re = '/pull';
+                            for (var requestIndex = 0; requestIndex < body.length; requestIndex++){
+                                if(body[requestIndex].html_url.match(re)){
+                                    json.push(body[requestIndex]);
                                 }
                             }
+                            if(body.length < 30){
+                                for(var requestIndex = 0; requestIndex < json.length; requestIndex++){
+                                    for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                        if(json[requestIndex].user.login === contributor_tally[contributorIndex].name){
+                                            contributor_tally[contributorIndex].comments++;
+                                        }
+                                    }
+                                }
+                                res.send(contributor_tally);
+                            } else {
+                                getData(pageCounter + 1);
+                            }
                         }
-                    }
-                    //issues/comments
-                    res.send(contributor_tally);
 
-                });
-                //End of second request
-            }
-            //contributors
-        });
-        //End of first request
+                    }); //End of second request
+                }
+                getData(1);
+
+            } //contributors
+        }); //End of first request
     });
 
 }
