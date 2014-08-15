@@ -49,11 +49,11 @@ of 30 datasets.
 |
 + - - Update Issue Comments per Contributor route to get all data...............[ X ]
 |
-+ - - Update Pull Requests per Contributor route to get all data................[   ]
++ - - Update Pull Requests per Contributor route to get all data................[ X ]
 |
 + - - Update Lines of Code per Contributor route to get all data................[ X ]
 |
-+ - - Update Pull Request Comments per Contributor route to get all data........[   ]
++ - - Update Pull Request Comments per Contributor route to get all data........[ X ]
 |
 + - - Update Number of Issues Opened per Contributor route to get all data......[ X ]
 |
