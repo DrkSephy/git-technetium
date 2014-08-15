@@ -287,7 +287,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/commits', function(req, res){
         request({
-            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
             headers: { 'user-agent': 'git-technetium'},
             json: true
 
