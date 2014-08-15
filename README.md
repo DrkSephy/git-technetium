@@ -3,7 +3,7 @@ git-technetium
 
 Repository for a github powered application built using the MEAN stack. The following features are planned:
 
-    [ ] Create modules for viewing statistics on a repository 
+    [X] Create modules for viewing statistics on a repository 
     [ ] Build meaningful graphs using D3 
     [ ] Ability to export reports to PDF
     [ ] Unit testing using Mocha/PhantomJS where applicable
