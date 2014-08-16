@@ -21,232 +21,44 @@
                                 </form>
 
                                 <div class="col-lg-12">
-                                  <div class="col-lg-4">
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-hover table-striped tablesorter">
                                             <thead>
                                                 <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Commits <i class="icon-sort"></i></th>
-                                                    
+                                                    <th class="header"> Contributor </th>
+                                                    <th class="header"> Commits </th>
+                                                    <th class="header"> Commit Comments </th>
+                                                    <th class="header"> LoC Added </th>
+                                                    <th class="header"> LoC Deleted </th>
+                                                    <th class="header"> Issues Opened </th>
+                                                    <th class="header"> Issues Assigned </th>
+                                                    <th class="header"> Issues Closed </th>
+                                                    <th class="header"> Issue Comments </th>
+                                                    <th class="header"> Pull Requests </th>
+                                                    <th class="header"> Pull Request Comments </th>
                                                 </tr>
                                             </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in commitData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.commits }}</td>
+                                            <tbody>
+                                                <tr data-ng-repeat="contributor in parsed">
+                                                 <td> {{ contributor.name }} </td>
+                                                 <td> {{ contributor.commits }} </td>
+                                                 <td> {{ contributor.commit_comments }} </td>
+                                                 <td> {{ contributor.loc_added }} </td>
+                                                 <td> {{ contributor.loc_deleted }} </td>
+                                                 <td> {{ contributor.issues_opened }} </td>
+                                                 <td> {{ contributor.issues_assigned }} </td>
+                                                 <td> {{ contributor.issues_closed }} </td>
+                                                 <td> {{ contributor.issue_comments }} </td>
+                                                 <td> {{ contributor.pull_requests }} </td>
+                                                 <td> {{ contributor.pull_request_comments }} </td>
 
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Commit Comments <i class="icon-sort"></i></th>
-                                                    
                                                 </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in commitCommentsData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.commit_comments }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
+                                            </tbody>
                                         </table>
                                     </div>
-                                  </div>
-
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Loc Added <i class="icon-sort"></i></th>
-                                                    <th class="header"> Loc Deleted <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in locData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.loc_added }}</td>
-                                                <td> {{ contributor.loc_deleted }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                <div class="col-lg-12">
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Issue Comments <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in issuesCommentsData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.comments }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Pull Requests <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in pullRequestsData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.total }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Pull Request Comments <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in pullRequestCommentsData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.comments }}</td>
-                                           </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
                                 </div>
 
 
-                                <div class="col-lg-12">
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Issues Assigned <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in issuesAssignedData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.issues_assigned }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Issues Closed <i class="icon-sort"></i></th>
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in issuesClosedData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.issues_closed }}</td>
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-
-
-                                  <div class="col-lg-4">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-hover table-striped tablesorter">
-                                            <thead>
-                                                <tr>
-                                                    <th class="header"> Contributor <i class="icon-sort"></i></th>
-                                                    <th class="header"> Issues Opened <i class="icon-sort"></i></th>
-                                                   
-                                                    
-                                                </tr>
-                                            </thead>
-                                        <tbody>
-                                            <tr data-ng-repeat="contributor in issuesOpenedData">
-                                                <td> {{ contributor.name }}</td>
-                                                <td> {{ contributor.issues_opened }}</td>
-                                                
-
-
-                                            </tr>
-                                        
-
-                                        </tbody>
-                                        </table>
-                                    </div>
-                                  </div>
-                                </div>
 
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->

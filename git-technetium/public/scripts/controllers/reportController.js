@@ -13,43 +13,148 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
     $scope.issuesCommentsData = [];
     $scope.pullRequestsData = [];
     $scope.pullRequestCommentsData = [];
+    $scope.parsed = []; 
+    var allData = [];
+    
 
     $scope.submitQuery = function(){
-        $scope.commitData = commitsFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.commitData = data;
-        })
 
-        $scope.locData = locFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.locData = data;
-        })
 
-        $scope.commitCommentsData = commitCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.commitCommentsData = data;
-        })
+        async.waterfall([
+            function(callback){
+                $scope.commitData = commitsFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    //console.log(allData);
+                    callback(null);
+                })
+                
+            },
+            function(callback){
+                $scope.locData = locFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    //console.log(allData);
+                    callback(null);
+                })
+            },
 
-        $scope.issuesAssignedData = issuesAssignedFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.issuesAssignedData = data;
-        })
+            function(callback){
+                $scope.commitCommentsData = commitCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    //console.log(allData)
+                    callback(null);
+                })
+            },
 
-        $scope.issuesClosedData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.issuesClosedData = data;
-        })
+            function(callback){
+                $scope.issuesAssignedData = issuesAssignedFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    //console.log(allData);
+                    callback(null);
+                })
 
-        $scope.issuesOpenedData = issuesOpenedFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.issuesOpenedData = data;
-        })
+            },
 
-        $scope.issuesCommentsData = issuesCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.issuesCommentsData = data;
-        })
+            function(callback){
+                $scope.issuesClosedData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
+                })
+            },
 
-        $scope.pullRequestsData = pullsFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.pullRequestsData = data;
-        })
+            function(callback){
+                $scope.issuesOpenedData = issuesOpenedFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
+                })
+            },
 
-        $scope.pullRequestCommentsData = pullRequestCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
-            $scope.pullRequestCommentsData = data;
-        })
+            function(callback){
+                $scope.issuesCommentsData = issuesCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
+                })
+            },
+
+            function(callback){
+                $scope.pullRequestsData = pullsFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
+                })
+            },
+
+            function(callback){
+                $scope.pullRequestCommentsData = pullRequestCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
+
+                })
+            },
+
+            function(callback){
+                var contributors = [];
+                var parsedData = [];
+                for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
+                    for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
+                        if(!(contributors.indexOf(allData[arrayIndex][attributeIndex].name) > -1)){
+                            contributors.push(allData[arrayIndex][attributeIndex].name);
+                        }
+                    }
+                }
+                // length: 3, loops 3 times
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                    var contributorData = {};
+                    parsedData.push(contributorData);
+                    // Will loop over all 9 array structures
+                    for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
+                        // will loop over each property inside the array
+                        //console.log(allData);
+                        for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
+
+                            //console.log(allData[arrayIndex][contributorIndex].commits);
+                            parsedData[contributorIndex]['name'] = allData[arrayIndex][contributorIndex].name;
+                            if(typeof(allData[arrayIndex][contributorIndex].commits) !== "undefined"){
+                                parsedData[contributorIndex]['commits'] = allData[arrayIndex][contributorIndex].commits;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].loc_added) !== "undefined"){
+                                parsedData[contributorIndex]['loc_added'] = allData[arrayIndex][contributorIndex].loc_added;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].loc_deleted) !== "undefined"){
+                                parsedData[contributorIndex]['loc_deleted'] = allData[arrayIndex][contributorIndex].loc_deleted;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].commit_comments) !== "undefined"){
+                                parsedData[contributorIndex]['commit_comments'] = allData[arrayIndex][contributorIndex].commit_comments;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_assigned) !== "undefined"){
+                                parsedData[contributorIndex]['issues_assigned'] = allData[arrayIndex][contributorIndex].issues_assigned;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_closed) !== "undefined"){
+                                parsedData[contributorIndex]['issues_closed'] = allData[arrayIndex][contributorIndex].issues_closed;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_opened) !== "undefined"){
+                                parsedData[contributorIndex]['issues_opened'] = allData[arrayIndex][contributorIndex].issues_opened;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].issue_comments) !== "undefined"){
+                                parsedData[contributorIndex]['issue_comments'] = allData[arrayIndex][contributorIndex].issue_comments;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].total) !== "undefined"){
+                                parsedData[contributorIndex]['pull_requests'] = allData[arrayIndex][contributorIndex].total;
+                            }
+                            if(typeof(allData[arrayIndex][contributorIndex].comments) !== "undefined"){
+                                parsedData[contributorIndex]['pull_request_comments'] = allData[arrayIndex][contributorIndex].comments;
+                            }
+                        }
+                    }
+                }
+                
+                callback(null, parsedData);
+            },
+        ], function (err, result) {
+            $scope.$apply(function(){
+                $scope.parsed = result;
+                console.log($scope.parsed);
+            }); 
+        });
+
     }
    
 });
