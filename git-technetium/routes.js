@@ -15,7 +15,12 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
      *      ownerName (string): The owner username of the target repository
      *      repoName  (string): The target repository name
      *  Postcondition:
-     *      An array, where each element contains the title of an issue in the repository
+     *      An array of objects such that each object contains the following:
+     *          number   (integer): The number of an issue in the repository
+     *          title    (string) : The title of an issue in the repository
+     *          state    (string) : The state (open, closed) of an issue in the repository
+     *          creator  (string) : The username of the person who opened the issue
+     *          assignee (string) : The username of the person who was assigned the issue
     **/
     router.get('/issues', function(req, res) {
         var issueData = [];
