@@ -26,12 +26,20 @@
                                         <table class="table table-bordered table-hover table-striped tablesorter">
                                             <thead>
                                                 <tr>
-                                                    <th class="header">Issue Title</th>
+                                                    <th class="header">#</th>
+                                                    <th class="header">Title</th>
+                                                    <th class="header">State</th>
+                                                    <th class="header">Opened by</th>
+                                                    <th class="header">Assigned to</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="issueTitle in pageData">
-                                                    <td>{{ issueTitle }}</td>
+                                                <tr data-ng-repeat="issue in pageData">
+                                                    <td>{{ issue.number }}</td>
+                                                    <td><a ng-href="http://github.com/DrkSephy/git-technetium/issues/{{ issue.number }}">{{ issue.title }}</a></td>
+                                                    <td>{{ issue.state }}</td>
+                                                    <td><a ng-href="http://github.com/{{ issue.creator }}">{{ issue.creator }}</a></td>
+                                                    <td><a ng-href="http://github.com/{{ issue.assignee }}">{{ issue.assignee }}</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
