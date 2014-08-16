@@ -13,7 +13,7 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
     $scope.issuesCommentsData = [];
     $scope.pullRequestsData = [];
     $scope.pullRequestCommentsData = [];
-    
+
     // Stores the final result of allData
     $scope.parsed = []; 
     var allData = [];
@@ -101,7 +101,9 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                     parsedData.push(contributorData);
                     for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
                         for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
-                            parsedData[contributorIndex]['name'] = allData[arrayIndex][contributorIndex].name;
+                            if(typeof(allData[arrayIndex][contributorIndex].name) !== "undefined"){
+                                parsedData[contributorIndex]['name'] = allData[arrayIndex][contributorIndex].name;
+                            }
                             if(typeof(allData[arrayIndex][contributorIndex].commits) !== "undefined"){
                                 parsedData[contributorIndex]['commits'] = allData[arrayIndex][contributorIndex].commits;
                             }
