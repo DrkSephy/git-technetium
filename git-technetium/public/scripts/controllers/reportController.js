@@ -55,13 +55,6 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
             },
 
             function(callback){
-                $scope.issuesClosedData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data){
-                    allData.push(data);
-                    callback(null);
-                })
-            },
-
-            function(callback){
                 $scope.issuesOpenedData = issuesOpenedFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
@@ -87,6 +80,13 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                     allData.push(data);
                     callback(null);
 
+                })
+            },
+
+            function(callback){
+                $scope.issuesClosedData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data){
+                    allData.push(data);
+                    callback(null);
                 })
             },
 
