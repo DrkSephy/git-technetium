@@ -31,6 +31,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             number: body[issueIndex].number,
                             title: body[issueIndex].title,
                             state: body[issueIndex].state,
+                            assignee: body[issueIndex].assignee ? body[issueIndex].assignee.login : ''
                         });
                     }
                 }
