@@ -15,13 +15,13 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
     $scope.pullRequestCommentsData = [];
 
     // Stores the final result of allData
-    $scope.parsed = []; 
     var allData = [];
     
 
     $scope.submitQuery = function(){
         async.waterfall([
             function(callback){
+                $scope.parsed = [];
                 allData = [];
                 callback(null);
             },
