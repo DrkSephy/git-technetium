@@ -61,7 +61,7 @@ of 30 datasets.
 |
 + - - Update Number of Issues Closed per Contributor route to get all data......[ X ]
 |
-+ - - Update Issues for Repository route to get all issue data..................[   ]
++ - - Update Issues for Repository route to get all issue data..................[ X ]
 
 #####################################################################################
 #               Tasks / Road map (Project Inception ~ August 9th, 2014)             #
