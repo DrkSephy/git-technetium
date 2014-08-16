@@ -537,7 +537,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                 for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
-                        'comments': 0
+                        'issue_comments': 0
                     });
                 }
 
@@ -561,7 +561,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                 for(var issuesIndex = 0; issuesIndex < json.length; issuesIndex++){
                                     for(var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
                                         if(json[issuesIndex].user.login === contributor_tally[contributorIndex].name){
-                                            contributor_tally[contributorIndex].comments++;
+                                            contributor_tally[contributorIndex].issue_comments++;
                                         }
                                     }
                                 }
