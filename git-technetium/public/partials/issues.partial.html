@@ -28,12 +28,14 @@
                                                 <tr>
                                                     <th class="header">#</th>
                                                     <th class="header">Title</th>
+                                                    <th class="header">State</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr data-ng-repeat="issue in pageData">
                                                     <td>{{ issue.number }}</td>
                                                     <td>{{ issue.title }}</td>
+                                                    <td>{{ issue.state }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
