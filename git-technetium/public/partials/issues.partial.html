@@ -35,7 +35,7 @@
                                             <tbody>
                                                 <tr data-ng-repeat="issue in pageData">
                                                     <td>{{ issue.number }}</td>
-                                                    <td>{{ issue.title }}</td>
+                                                    <td><a ng-href="http://github.com/DrkSephy/git-technetium/issues/{{ issue.number }}">{{ issue.title }}</a></td>
                                                     <td>{{ issue.state }}</td>
                                                     <td>{{ issue.assignee }}</td>
                                                 </tr>
