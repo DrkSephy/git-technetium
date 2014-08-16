@@ -24,13 +24,17 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
             json: true
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
-                var issueTitles = [];
+                var issueData = [];
                 for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
                     if(!body[issueIndex].pull_request) {
-                        issueTitles.push(body[issueIndex].title);
+                        issueData.push({
+                            number: body[issueIndex].number,
+                            title: body[issueIndex].title,
+
+                        });
                     }
                 }
-                res.send(issueTitles);
+                res.send(issueData);
             }
         });
     });
