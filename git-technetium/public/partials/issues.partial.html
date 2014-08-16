@@ -29,6 +29,7 @@
                                                     <th class="header">#</th>
                                                     <th class="header">Title</th>
                                                     <th class="header">State</th>
+                                                    <th class="header">Opened by</th>
                                                     <th class="header">Assigned to</th>
                                                 </tr>
                                             </thead>
@@ -37,6 +38,7 @@
                                                     <td>{{ issue.number }}</td>
                                                     <td><a ng-href="http://github.com/DrkSephy/git-technetium/issues/{{ issue.number }}">{{ issue.title }}</a></td>
                                                     <td>{{ issue.state }}</td>
+                                                    <td>{{ issue.creator }}</td>
                                                     <td><a ng-href="http://github.com/{{ issue.assignee }}">{{ issue.assignee }}</a></td>
                                                 </tr>
                                             </tbody>
