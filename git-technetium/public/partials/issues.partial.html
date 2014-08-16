@@ -26,12 +26,14 @@
                                         <table class="table table-bordered table-hover table-striped tablesorter">
                                             <thead>
                                                 <tr>
-                                                    <th class="header">Issue Title</th>
+                                                    <th class="header">#</th>
+                                                    <th class="header">Title</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr data-ng-repeat="issueTitle in pageData">
-                                                    <td>{{ issueTitle }}</td>
+                                                <tr data-ng-repeat="issue in pageData">
+                                                    <td>{{ issue.number }}</td>
+                                                    <td>{{ issue.title }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
