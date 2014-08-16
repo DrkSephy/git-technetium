@@ -37,7 +37,7 @@
                                                     <td>{{ issue.number }}</td>
                                                     <td><a ng-href="http://github.com/DrkSephy/git-technetium/issues/{{ issue.number }}">{{ issue.title }}</a></td>
                                                     <td>{{ issue.state }}</td>
-                                                    <td>{{ issue.assignee }}</td>
+                                                    <td><a ng-href="http://github.com/{{ issue.assignee }}">{{ issue.assignee }}</a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
