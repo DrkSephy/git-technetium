@@ -6,7 +6,6 @@ gitApp.controller('locController', function($scope, locFactory){
     $scope.submitQuery = function(){
         $scope.pageData = locFactory.get($scope.owner, $scope.repo).success(function(data){
             $scope.pageData = data;
-            console.log($scope.pageData);
         });
     }
 })

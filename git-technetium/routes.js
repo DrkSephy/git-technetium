@@ -1,4 +1,4 @@
-module.exports = function(router, request, async) {
+module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
     // Router will handle any requests with this endpoint depending on where router is "use()'d.
     router.get('/helloworld', function(req, res) {
         // Returns a JSON response when user visits this endpoint
@@ -15,24 +15,43 @@ module.exports = function(router, request, async) {
      *      ownerName (string): The owner username of the target repository
      *      repoName  (string): The target repository name
      *  Postcondition:
-     *      An array, where each element contains the title of an issue in the repository
+     *      An array of objects such that each object contains the following:
+     *          number   (integer): The number of an issue in the repository
+     *          title    (string) : The title of an issue in the repository
+     *          state    (string) : The state (open, closed) of an issue in the repository
+     *          creator  (string) : The username of the person who opened the issue
+     *          assignee (string) : The username of the person who was assigned the issue
     **/
     router.get('/issues', function(req, res) {
-        request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all',
-            headers: { 'user-agent': 'git-technetium' },
-            json: true
-        }, function(error, response, body) {
-            if(!error && response.statusCode === 200) {
-                var issueTitles = [];
-                for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
-                    if(!body[issueIndex].pull_request) {
-                        issueTitles.push(body[issueIndex].title);
+        var issueData = [];
+        var getData = function(pageCounter) {
+            request({
+                url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all' + '&page=' + pageCounter + '&client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
+                headers: { 'user-agent': 'git-technetium' },
+                json: true
+            }, function(error, response, body) {
+                if(!error && response.statusCode === 200) {
+                    for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
+                        if(!body[issueIndex].pull_request) {
+                            issueData.push({
+                                number: body[issueIndex].number,
+                                title: body[issueIndex].title,
+                                state: body[issueIndex].state,
+                                creator: body[issueIndex].user.login,
+                                assignee: body[issueIndex].assignee ? body[issueIndex].assignee.login : ''
+                            });
+                        }
+                    }
+
+                    if(body.length < 30) {
+                        res.send(issueData);
+                    } else {
+                        getData(pageCounter + 1);
                     }
                 }
-                res.send(issueTitles);
-            }
-        });
+            });
+        };
+        getData(1);
     });
 
     /**
@@ -46,7 +65,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_opened', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -70,7 +89,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all&page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body) {
@@ -92,14 +111,11 @@ module.exports = function(router, request, async) {
                             } else{
                                 getData(pageCounter + 1);
                             }
-                            //res.send(urls);
                         }
-                    }); // end request
-                } // end getData function call
+                    }); 
+                } 
                 getData(1);
-
-
-            }
+           }
         });
     });
 
@@ -114,7 +130,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_assigned', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -137,7 +153,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=all&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all&page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body) {
@@ -160,7 +176,7 @@ module.exports = function(router, request, async) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // end request
+                    });
                 }
                 getData(1);
             }
@@ -178,7 +194,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issues_closed', function(req, res) {
         request({
-            url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body) {
@@ -212,7 +228,7 @@ module.exports = function(router, request, async) {
                 */
                 var getData = function(pageCounter) {
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues?state=closed&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=closed&page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: { 'user-agent': 'git-technetium' },
                         json: true
                     }, function(error, response, body){
@@ -231,7 +247,7 @@ module.exports = function(router, request, async) {
                                 // async.each will apply the request function for each item inside the issueNumbers array.
                                 async.each(issueNumbers, function(number, callback) {
                                       request({
-                                        url: 'https://api.github.com/repos/' + req.query.ownerName + '/' + req.query.repoName + '/issues/' + number + '/events',
+                                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/' + number + '/events' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                                         headers: { 'user-agent' : 'git-technetium' },
                                         json: true
                                       }, function(error, response, body){
@@ -242,11 +258,10 @@ module.exports = function(router, request, async) {
                                                             if(body[eventData].actor.login === contributorIssuesClosed[contributorIndex].name){
                                                                 contributorIssuesClosed[contributorIndex].issues_closed++;
                                                             }
-                                                        }// end inner for loop
-         
-                                                    } // end if
-                                                } // end outer for loop
-                                           } // end if
+                                                        }
+                                                    } 
+                                                }
+                                           }
 
                                             // If we have processed all the requests, we send a callback with the data attached.  
                                             // According to the documentation, if you send callback() with anything inside,
@@ -254,10 +269,10 @@ module.exports = function(router, request, async) {
                                             // When all requests are done, send the data through a callback to access it at 
                                             // the end, and send it up to the server. 
                                              if(issueNumbers.indexOf(number) === issueNumbers.length - 1){
-                                                callback({data: contributorIssuesClosed});
+                                                res.send(contributorIssuesClosed);
                                             }
          
-                                        }) // end request
+                                        })
                                     }, function(err){
                                     // We can access the data processed by async.each through the error callback. 
                                     if( err ) {
@@ -272,13 +287,12 @@ module.exports = function(router, request, async) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // end second request
-                }
-                // Call function to get all data. 
+                    }); 
+                } 
                 getData(1);
-            } // end first request if statement
-        }); // end first request 
-    }); // end router.get
+            } 
+        });
+    });
 
     /**
       * Route to query total commits per contributor within a given repository.
@@ -287,7 +301,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/commits', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium'},
             json: true
 
@@ -308,12 +322,11 @@ module.exports = function(router, request, async) {
                 }
                
                 request({
-                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                     headers: { 'user-agent': 'git-technetium' },
                     json: true
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
-                        // loop through all data
                         for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
                             for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                                 if(body[dataIndex].author.login === contributor_commits[contributorIndex].name){
@@ -336,7 +349,7 @@ module.exports = function(router, request, async) {
     **/
     router.get('/loc', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium'},
             json: true
 
@@ -358,15 +371,13 @@ module.exports = function(router, request, async) {
                 }
                
                 request({
-                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors',
+                    url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                     headers: { 'user-agent': 'git-technetium' },
                     json: true
                 }, function(error, response, body){
                     if(!error && response.statusCode === 200){
-                        // loop through all data
                         for(var dataIndex = 0; dataIndex < body.length; dataIndex++){
                             for(var weekIndex = 0; weekIndex < body[dataIndex].weeks.length; weekIndex++){
-                                //console.log(body[dataIndex].weeks[weekIndex]);
                                 for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                                     if(body[dataIndex].author.login === contributor_loc[contributorIndex].name){
                                         contributor_loc[contributorIndex].loc_added += body[dataIndex].weeks[weekIndex].a;
@@ -382,7 +393,7 @@ module.exports = function(router, request, async) {
                 });
             }
         });
-    }); // End router.get
+    }); 
 
      /**
       * Route to query total commit comments per contributor within a given repository.
@@ -392,7 +403,7 @@ module.exports = function(router, request, async) {
     router.get('/commitComments', function(req, res){
         // First request builds a list of all contributors for a given repository.
         request({
-            url: 'https://api.github.com/repos/DrkSephy/git-technetium/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' +  req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium' },
             json: true
         }, function(error, response, body){
@@ -416,7 +427,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments?page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments?page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: { 'user-agent' : 'git-technetium' },
                         json: true
                     }, function(error, response, body){
@@ -437,12 +448,12 @@ module.exports = function(router, request, async) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); // End second request function
+                    }); 
                 }
                 getData(1);
 
             }
-        }); // End first request function
+        }); 
     });
 
     /**
@@ -451,20 +462,19 @@ module.exports = function(router, request, async) {
     **/
     router.get('/pulls', function(req, res){
         request({
-            url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: {'user-agent' : 'git-technetium'},
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors =[];
-                var contributor_tally =[];
 
-                //Obtaining list of contributors
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
 
-                //Initializing the contributors list to 0
+                var contributor_tally =[];
+
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributor_tally.push({
                         'name' : contributors[contributor_index],
@@ -476,7 +486,7 @@ module.exports = function(router, request, async) {
                 var pageCounter = 1;
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/pulls?state=closed&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/'+req.query.owner + '/' + req.query.repo + '/pulls?state=closed&page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: {'user-agent' : 'git-technetium'},
                         json: true
                     }, function(error, response, body){
@@ -498,13 +508,11 @@ module.exports = function(router, request, async) {
                             }
 
                         }
-                    }); //End of second request
+                    }); 
                 }
                 getData(1);
             }
-            //end of IF
         });
-        //End of first request
     });
 
     /**
@@ -513,23 +521,23 @@ module.exports = function(router, request, async) {
     **/
     router.get('/issuesComments', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: {'user-agent' : 'git-technetium'},
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-                //Obtaining list of contributors
+
                 for (var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributor_tally =[];
-                //Initializing the contributors list to 0
+
                 for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
-                        'comments': 0
+                        'issue_comments': 0
                     });
                 }
 
@@ -538,7 +546,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: {'user-agent' : 'git-technetium'},
                         json: true                    
                     }, function(error, response, body){
@@ -553,8 +561,7 @@ module.exports = function(router, request, async) {
                                 for(var issuesIndex = 0; issuesIndex < json.length; issuesIndex++){
                                     for(var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++){
                                         if(json[issuesIndex].user.login === contributor_tally[contributorIndex].name){
-                                            contributor_tally[contributorIndex].comments++;
-                                            console.log(contributor_tally);
+                                            contributor_tally[contributorIndex].issue_comments++;
                                         }
                                     }
                                 }
@@ -563,12 +570,11 @@ module.exports = function(router, request, async) {
                                 getData(pageCounter + 1);
                             }                     
                         }
-                    }); //End of second request   
+                    }); 
                 }
                 getData(1);
             }
         });
-        //End of first request
     });
 
     /**
@@ -577,20 +583,20 @@ module.exports = function(router, request, async) {
     **/
     router.get('/pullRequestComments', function(req, res){
         request({
-            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors',
+            url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
             headers: {'user-agent' : 'git-technetium'},
             json: true
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 
                 var contributors = [];
-                //Obtaining list of contributors
+            
                 for (var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
 
                 var contributor_tally =[];
-                //Initializing the contributors list to 0
+           
                 for (var contributor_index = 0; contributor_index < contributors.length; contributor_index++){
                      contributor_tally.push({
                         'name': contributors[contributor_index],
@@ -603,7 +609,7 @@ module.exports = function(router, request, async) {
 
                 var getData = function(pageCounter){
                     request({
-                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=' + pageCounter,
+                        url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?state=closed&page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
                         headers: {'user-agent' : 'git-technetium'},
                         json: true
                     },function(error, response, body){
@@ -628,13 +634,12 @@ module.exports = function(router, request, async) {
                             }
                         }
 
-                    }); //End of second request
+                    }); 
                 }
                 getData(1);
 
-            } //contributors
-        }); //End of first request
+            } 
+        }); 
     });
-
 }
 

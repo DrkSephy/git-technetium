@@ -21,13 +21,24 @@
                                     </p>
                                 </form>
 
-
-                                <table>
-                                	<tr data-ng-repeat="data in pageData">
-                                		<td>{{ data.name }}</td>
-                                		<td>{{ data.comments }}</td>
-                                	</tr>
-                                </table>
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped tablesorter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="header">Contributor Name</th>
+                                                    <th class="header">Pull Request Comments</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="data in pageData">
+                                                    <td>{{ data.name }}</td>
+                                                    <td>{{ data.comments }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->

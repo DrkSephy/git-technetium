@@ -3,7 +3,7 @@ git-technetium
 
 Repository for a github powered application built using the MEAN stack. The following features are planned:
 
-    [ ] Create modules for viewing statistics on a repository 
+    [X] Create modules for viewing statistics on a repository 
     [ ] Build meaningful graphs using D3 
     [ ] Ability to export reports to PDF
     [ ] Unit testing using Mocha/PhantomJS where applicable
@@ -13,8 +13,9 @@ Repository for a github powered application built using the MEAN stack. The foll
 
 A more detailed set of current tasks can be found here: [task list](https://github.com/DrkSephy/git-technetium/blob/master/notes/tasks.txt)
 
-Getting Started
----------------
+
+Dependencies
+------------
 
 After cloning this repository, the first step is to install all dependencies. 
 
@@ -23,19 +24,25 @@ After cloning this repository, the first step is to install all dependencies.
 
 NOTE: If you are on a Mac, you will need to run `sudo npm install`. 
 
-There is currently one test endpoint for the server, which pulls data from the NHL API. If you navigate to:
-`127.0.0.1:8080/api/helloworld`, you will see the json response in your browser.
+Getting Started
+---------------
 
-There is also a test endpoint for the client. If you go to `127.0.0.1:8080/#/hello`, you will see a basic
-`Hello World` response. 
+Inside of your Github account settings, please register this application in order to obtain a 
+`client_id` and `client_secret`. This will allow you to make up to 5000 requests per hour, and
+allows for quicker testing. Once you have obtained these keys, modify `server.js` as shown below:
 
-You are now ready to start creating your own routes and begin any of the tasks listed within `notes/tasks.txt`.
+    var CLIENT_ID = 'YOUR_CLIENT_ID';
+    var CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
+
 
 Existing Routes
 ---------------
 
 After getting the project running, the following client-side routes are currently available for use: 
     
+    // Displays a listing of all statistics in a given repository
+    127.0.0.1:8080/#/reports
+
     // Returns all issue titles for a given repository.
     127.0.0.1:8080/#/issues
 
@@ -70,6 +77,7 @@ After getting the project running, the following client-side routes are currentl
 Useful Libraries / Links
 ------------------------
 
+* [async.js](https://github.com/caolan/async) - A library with powerful functions for dealing with asynchronous code.
 * [pdfmake](http://pdfmake.org/#/) - A client/server-side PDF printing library.
 * [QUnit](http://qunitjs.com/) - A powerful JavaScript unit-testing framework.
 * [UnitJS](http://unitjs.com/) - Another powerful JavaScript unit-testing framework. 

@@ -21,18 +21,26 @@
                                     </p>
                                 </form>
 
-                                <table>
-                                    <tr>
-                                        <th>Contributor Name</th>
-                                        <th>Lines of Code Added</th>
-                                        <th>Lines of Code Deleted</th>
-                                    </tr>
-                                    <tr data-ng-repeat="contributor in pageData">
-                                        <td>{{ contributor.name }}</td>
-                                        <td>{{ contributor.loc_added }}</td>
-                                        <td>{{ contributor.loc_deleted }}</td>
-                                    </tr>
-                                </table>
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped tablesorter">
+                                            <thead>
+                                                <tr>
+                                                    <th class="header">Contributor Name</th>
+                                                    <th class="header">Lines of Code Added</th>
+                                                    <th class="header">Lines of Code Deleted</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr data-ng-repeat="contributor in pageData">
+                                                    <td>{{ contributor.name }}</td>
+                                                    <td>{{ contributor.loc_added }}</td>
+                                                    <td>{{ contributor.loc_deleted }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
 
                             </div> <!-- /panel-body -->
                         </div> <!-- /panel panel-default-->

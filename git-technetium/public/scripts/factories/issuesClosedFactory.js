@@ -1,7 +1,3 @@
-/**
- *  Factory for getting the number of closed issues per contributor in a repository.
- */
-
 'use strict';
 
 gitApp.factory('issuesClosedFactory', function($http) {
