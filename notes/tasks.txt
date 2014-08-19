@@ -1,5 +1,5 @@
 #####################################################################################
-#               Tasks / Road map (August 9th, 2014 ~ Present)                       #
+#               Tasks / Road map (August 9th, 2014 ~ August 19th- 2014)             #
 #####################################################################################
 
 With the initial set of data-gathering tasks finished, it is time to improve them.
