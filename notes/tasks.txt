@@ -1,5 +1,27 @@
 #####################################################################################
-#               Tasks / Road map (August 9th, 2014 ~ Present)                       #
+#               Tasks / Road map (August 19th, 2014 ~ Present)                      #
+#####################################################################################
+
+With the foundation of the project at a stable, complete point, the following is a 
+list of tasks / features that are important. 
+
++ - - Gather commits per week per contributor from /contributors endpoint.........[ ]
+  |
+   - - Use data to build time series graph of these commits.......................[ ]
+  
+   
++ - - Use Issue data to build graphs of completion rate...........................[ ]
+
++ - - Set up User login system....................................................[ ]
+  |
+   - - Develop OAuth system for users  to login...................................[ ]
+  |
+   - - Integrate user/OAuth system with database..................................[ ]
+
+
+
+#####################################################################################
+#               Tasks / Road map (August 9th, 2014 ~ August 19th- 2014)             #
 #####################################################################################
 
 With the initial set of data-gathering tasks finished, it is time to improve them.
