@@ -41,37 +41,37 @@ Existing Routes
 After getting the project running, the following client-side routes are currently available for use: 
     
     // Displays a listing of all statistics in a given repository
-    127.0.0.1:8080/#/reports
+    127.0.0.1:9000/#/reports
 
     // Returns all issue titles for a given repository.
-    127.0.0.1:8080/#/issues
+    127.0.0.1:9000/#/issues
 
     // Returns a listing of the number of commits for each contributor for a given repository.
-    127.0.0.1:8080/#/commits
+    127.0.0.1:9000/#/commits
 
     // Returns a listing of all issues opened for each contributor in a repository.
-    127.0.0.1:8080/#/issues_opened
+    127.0.0.1:9000/#/issues_opened
 
     // Returns a listing of the number of issues assigned to each contributor in a given repository.
-    127.0.0.1:8080/#/issues_assigned
+    127.0.0.1:9000/#/issues_assigned
 
     // Returns a listing of the number of  issues closed by each contributor in a given repository.
-    127.0.0.1:8080/#/issues_closed
+    127.0.0.1:9000/#/issues_closed
 
     // Returns a listing of total pull request comments by each contributor in a given repository.
-    http://127.0.0.1:8080/#/pullRequestComments
+    http://127.0.0.1:9000/#/pullRequestComments
 
     // Returns the total number of comments on issues by each contributor in a given repository.
-    127.0.0.1:8080/#/issuesComments
+    127.0.0.1:9000/#/issuesComments
 
     // Returns a listing of the lines of code added/deleted by each contributor in a given repository.
-    127.0.0.1:8080/#/loc
+    127.0.0.1:9000/#/loc
 
     // Returns the total number of comments on commits for each contributor in a given repository.
-    127.0.0.1:8080/#/commitComments
+    127.0.0.1:9000/#/commitComments
 
     // Returns the total number of pull requests by each contributor in a given repository.
-    127.0.0.1:8080/#/pulls
+    127.0.0.1:9000/#/pulls
 
 
 Useful Libraries / Links
