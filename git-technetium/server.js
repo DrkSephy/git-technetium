@@ -11,7 +11,16 @@ var app = express();
 var router = express.Router();
 
 // Register routes of Router
-require('./routes')(router, request, async, config);
+require('./routes/issues')(router, request, async, config);
+require('./routes/issues_opened')(router, request, async, config);
+require('./routes/issues_assigned')(router, request, async, config);
+require('./routes/issues_closed')(router, request, async, config);
+require('./routes/commits')(router, request, async, config);
+require('./routes/loc')(router, request, async, config);
+require('./routes/commit_comments')(router, request, async, config);
+require('./routes/pull_requests')(router, request, async, config);
+require('./routes/issue_comments')(router, request, async, config);
+require('./routes/pull_request_comments')(router, request, async, config);
 
 // Prefix all routes with /api
 app.use('/api', router);
