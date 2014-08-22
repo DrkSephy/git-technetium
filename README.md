@@ -77,6 +77,8 @@ After getting the project running, the following client-side routes are currentl
 Useful Libraries / Links
 ------------------------
 
+* [istanbul](https://github.com/gotwarlost/istanbul) - JS code coverage tool. 
+* [karma-runner](https://github.com/karma-runner/karma) - Powerful test runner supporting several testing frameworks.
 * [async.js](https://github.com/caolan/async) - A library with powerful functions for dealing with asynchronous code.
 * [pdfmake](http://pdfmake.org/#/) - A client/server-side PDF printing library.
 * [QUnit](http://qunitjs.com/) - A powerful JavaScript unit-testing framework.
