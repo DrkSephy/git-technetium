@@ -1,7 +1,8 @@
 // Require all needed modules
 var express = require('express'),
     request = require('request'),
-    async   = require('async');
+    async   = require('async'),
+    config  = require('./config');
 
 // Create the Express application
 var app = express();
@@ -9,11 +10,8 @@ var app = express();
 // Get an instance of the Express Router
 var router = express.Router();
 
-var CLIENT_ID = '';
-var CLIENT_SECRET = '';
-
 // Register routes of Router
-require('./routes')(router, request, async, CLIENT_ID, CLIENT_SECRET);
+require('./routes')(router, request, async, config);
 
 // Prefix all routes with /api
 app.use('/api', router);
