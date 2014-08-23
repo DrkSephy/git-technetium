@@ -29,11 +29,10 @@ Getting Started
 
 Inside of your Github account settings, please register this application in order to obtain a 
 `client_id` and `client_secret`. This will allow you to make up to 5000 requests per hour, and
-allows for quicker testing. Once you have obtained these keys, modify `config.js` as shown below:
+allows for quicker testing. For help on registering an application, see [this link](http://docs.codenvy.com/register-a-github-application/) Once you have obtained these keys, modify `config.js` as shown below:
 
     var CLIENT_ID = 'YOUR_CLIENT_ID';
     var CLIENT_SECRET = 'YOUR_CLIENT_SECRET';
-
 
 Useful Libraries / Links
 ------------------------
