@@ -153,5 +153,3 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
     }
    
 });
-
-
