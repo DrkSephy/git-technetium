@@ -7,5 +7,5 @@ gitApp.controller('issuesCommentsController', function($scope, issuesCommentsFac
 		$scope.pageData = issuesCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
 			$scope.pageData = data;
 		});
-	}
+	};
 });

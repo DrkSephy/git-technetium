@@ -7,5 +7,5 @@ gitApp.controller('locController', function($scope, locFactory){
         $scope.pageData = locFactory.get($scope.owner, $scope.repo).success(function(data){
             $scope.pageData = data;
         });
-    }
-})
+    };
+});

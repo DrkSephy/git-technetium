@@ -7,5 +7,5 @@ gitApp.controller('commitsController', function($scope, commitsFactory){
         $scope.pageData = commitsFactory.get($scope.owner, $scope.repo).success(function(data){
             $scope.pageData = data;
         });
-    }
+    };
 });

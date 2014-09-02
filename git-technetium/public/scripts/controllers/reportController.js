@@ -1,6 +1,6 @@
 'use strict';
 
-gitApp.controller('reportController', function($scope, commitsFactory, locFactory, commitCommentsFactory, 
+gitApp.controller('reportController', function($scope, commitsFactory, locFactory, commitCommentsFactory,
                     issuesAssignedFactory, issuesClosedFactory, issuesOpenedFactory, issuesCommentsFactory,
                     pullsFactory, pullRequestCommentsFactory){
 
@@ -16,7 +16,7 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
 
     // Stores the final result of allData
     var allData = [];
-    
+
 
     $scope.submitQuery = function(){
         async.waterfall([
@@ -25,74 +25,74 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                 allData = [];
                 callback(null);
             },
+
             function(callback){
                 $scope.commitData = commitsFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
-                
+                });
             },
+
             function(callback){
                 $scope.locData = locFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.commitCommentsData = commitCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.issuesAssignedData = issuesAssignedFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
-
+                });
             },
 
             function(callback){
                 $scope.issuesOpenedData = issuesOpenedFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.issuesCommentsData = issuesCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.issuesClosedData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.pullRequestsData = pullsFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-                })
+                });
             },
 
             function(callback){
                 $scope.pullRequestCommentsData = pullRequestCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
                     allData.push(data);
                     callback(null);
-
-                })
+                });
             },
 
             function(callback){
                 var contributors = [];
                 var parsedData = [];
+
                 for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
                     for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
                         if(!(contributors.indexOf(allData[arrayIndex][attributeIndex].name) > -1)){
@@ -100,9 +100,11 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                         }
                     }
                 }
+
                 for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                     var contributorData = {};
                     parsedData.push(contributorData);
+
                     for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
                         for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
                             if(typeof(allData[arrayIndex][contributorIndex].name) !== "undefined"){
@@ -141,15 +143,14 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                         }
                     }
                 }
+
                 callback(null, parsedData);
             },
         ], function (err, result) {
             $scope.$apply(function(){
                 $scope.parsed = result;
                 console.log($scope.parsed);
-            }); 
+            });
         });
-
-    }
-   
+    };
 });

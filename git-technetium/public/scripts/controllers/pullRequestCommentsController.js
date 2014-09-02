@@ -7,5 +7,5 @@ gitApp.controller('pullRequestCommentsController', function($scope, pullRequestC
 		$scope.pageData = pullRequestCommentsFactory.get($scope.owner, $scope.repo).success(function(data){
 			$scope.pageData = data;
 		});
-	}
+	};
 });
