@@ -113,7 +113,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
            }
         });
@@ -178,7 +178,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
@@ -273,8 +273,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                                              if(issueNumbers.indexOf(number) === issueNumbers.length - 1) {
                                                 res.send(contributorIssuesClosed);
                                             }
-
-                                        })
+                                        });
                                     }, function(err) {
                                     // We can access the data processed by async.each through the error callback.
                                     if( err ) {
@@ -290,7 +289,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
@@ -424,7 +423,6 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
 
                 var json = [];
                 var pageCounter = 1;
-
                 var getData = function(pageCounter) {
                     request({
                         url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments?page=' + pageCounter + '&' + 'client_id=' + CLIENT_ID + '&' + 'client_secret=' + CLIENT_SECRET,
@@ -450,7 +448,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
@@ -507,7 +505,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
@@ -567,7 +565,7 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
@@ -628,9 +626,9 @@ module.exports = function(router, request, async, CLIENT_ID, CLIENT_SECRET) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
     });
-}
+};
