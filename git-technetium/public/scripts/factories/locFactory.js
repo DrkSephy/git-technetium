@@ -1,8 +1,8 @@
 'use strict';
 
-gitApp.factory('locFactory', function($http){
+gitApp.factory('locFactory', function($http) {
     return {
-        get: function(owner, repo){
+        get: function(owner, repo) {
             return $http({
                 url: '/api/loc',
                 method: 'GET',

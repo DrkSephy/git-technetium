@@ -1,8 +1,8 @@
 'use strict';
 
-gitApp.factory('commitCommentsFactory', function($http){
+gitApp.factory('commitCommentsFactory', function($http) {
     return {
-        get: function(owner, repo){
+        get: function(owner, repo) {
             return $http({
                 url: '/api/commitComments',
                 method: 'GET',

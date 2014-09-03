@@ -1,8 +1,8 @@
 'use strict';
 
-gitApp.factory('pullRequestCommentsFactory', function($http){
+gitApp.factory('pullRequestCommentsFactory', function($http) {
 	return {
-		get: function(owner, repo){
+		get: function(owner, repo) {
 			return $http({
 				url: '/api/pullRequestComments',
 				method: 'GET',
