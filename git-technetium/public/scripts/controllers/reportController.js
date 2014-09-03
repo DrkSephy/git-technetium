@@ -107,37 +107,37 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
 
                     for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++){
                         for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++){
-                            if(typeof(allData[arrayIndex][contributorIndex].name) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].name) !== 'undefined'){
                                 parsedData[contributorIndex]['name'] = allData[arrayIndex][contributorIndex].name;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].commits) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].commits) !== 'undefined'){
                                 parsedData[contributorIndex]['commits'] = allData[arrayIndex][contributorIndex].commits;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].loc_added) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].loc_added) !== 'undefined'){
                                 parsedData[contributorIndex]['loc_added'] = allData[arrayIndex][contributorIndex].loc_added;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].loc_deleted) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].loc_deleted) !== 'undefined'){
                                 parsedData[contributorIndex]['loc_deleted'] = allData[arrayIndex][contributorIndex].loc_deleted;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].commit_comments) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].commit_comments) !== 'undefined'){
                                 parsedData[contributorIndex]['commit_comments'] = allData[arrayIndex][contributorIndex].commit_comments;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].issues_assigned) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_assigned) !== 'undefined'){
                                 parsedData[contributorIndex]['issues_assigned'] = allData[arrayIndex][contributorIndex].issues_assigned;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].issues_closed) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_closed) !== 'undefined'){
                                 parsedData[contributorIndex]['issues_closed'] = allData[arrayIndex][contributorIndex].issues_closed;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].issues_opened) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].issues_opened) !== 'undefined'){
                                 parsedData[contributorIndex]['issues_opened'] = allData[arrayIndex][contributorIndex].issues_opened;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].issue_comments) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].issue_comments) !== 'undefined'){
                                 parsedData[contributorIndex]['issue_comments'] = allData[arrayIndex][contributorIndex].issue_comments;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].total) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].total) !== 'undefined'){
                                 parsedData[contributorIndex]['pull_requests'] = allData[arrayIndex][contributorIndex].total;
                             }
-                            if(typeof(allData[arrayIndex][contributorIndex].comments) !== "undefined"){
+                            if(typeof(allData[arrayIndex][contributorIndex].comments) !== 'undefined'){
                                 parsedData[contributorIndex]['pull_request_comments'] = allData[arrayIndex][contributorIndex].comments;
                             }
                         }
