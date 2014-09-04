@@ -28,10 +28,8 @@ module.exports = function(router, request, async, config) {
                     });
                 }
 
-
                 var json = [];
                 var pageCounter = 1;
-
                 var getData = function(pageCounter){
                     request({
                         url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues?state=all&page=' + pageCounter + '&' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,

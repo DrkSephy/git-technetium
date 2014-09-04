@@ -9,11 +9,9 @@ module.exports = function(router, request, async, config) {
             url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/contributors' + '?' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,
             headers: { 'user-agent': 'git-technetium'},
             json: true
-
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-
                 for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
                     contributors.push(body[contributorIndex].login);
                 }
@@ -41,11 +39,9 @@ module.exports = function(router, request, async, config) {
                                         contributor_loc[contributorIndex].loc_deleted += body[dataIndex].weeks[weekIndex].d;
                                     }
                                 }
-
                             }
                         }
                         res.send(contributor_loc);
-
                     }
                 });
             }

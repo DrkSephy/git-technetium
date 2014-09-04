@@ -40,7 +40,6 @@ module.exports = function(router, request, async, config) {
                                function repeatedly until body is < 30 (meaning we have no more URLs to process).
                                Lastly, the issueNumbers array is processed by async.each, which handles getting the
                                event data from each issue.
-
                 */
                 var getData = function(pageCounter) {
                     request({
@@ -95,7 +94,6 @@ module.exports = function(router, request, async, config) {
                                       res.send(err.data);
                                     } else {
                                       console.log("Done");
-
                                     }
                                 });
                             } else {

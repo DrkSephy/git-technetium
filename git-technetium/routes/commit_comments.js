@@ -13,7 +13,6 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors =[];
-
                 for(var contributor_index = 0; contributor_index < body.length; contributor_index++){
                     contributors.push(body[contributor_index].login);
                 }
@@ -28,7 +27,6 @@ module.exports = function(router, request, async, config) {
 
                 var json = [];
                 var pageCounter = 1;
-
                 var getData = function(pageCounter){
                     request({
                         url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/comments?page=' + pageCounter + '&' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,
@@ -55,7 +53,6 @@ module.exports = function(router, request, async, config) {
                     });
                 }
                 getData(1);
-
             }
         });
     });

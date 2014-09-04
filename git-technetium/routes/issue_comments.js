@@ -11,13 +11,11 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body){
             if(!error && response.statusCode === 200){
                 var contributors = [];
-
                 for (var contributorIndex = 0; contributorIndex < body.length; contributorIndex++){
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributor_tally =[];
-
                 for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
@@ -27,7 +25,6 @@ module.exports = function(router, request, async, config) {
 
                 var json = [];
                 var pageCounter = 1;
-
                 var getData = function(pageCounter){
                     request({
                         url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/comments?page=' + pageCounter + '&' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,
