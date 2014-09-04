@@ -1,4 +1,4 @@
-module.exports = function(router, request, async, config) { 
+module.exports = function(router, request, async, config) {
     /**
       * Route to query total commit comments per contributor within a given repository.
       * params: owner, repo
@@ -52,11 +52,11 @@ module.exports = function(router, request, async, config) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); 
+                    });
                 }
                 getData(1);
 
             }
-        }); 
+        });
     });
 }

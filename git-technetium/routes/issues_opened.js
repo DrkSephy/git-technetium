@@ -28,7 +28,7 @@ module.exports = function(router, request, async, config) {
                     });
                 }
 
-                
+
                 var json = [];
                 var pageCounter = 1;
 
@@ -57,8 +57,8 @@ module.exports = function(router, request, async, config) {
                                 getData(pageCounter + 1);
                             }
                         }
-                    }); 
-                } 
+                    });
+                }
                 getData(1);
            }
         });

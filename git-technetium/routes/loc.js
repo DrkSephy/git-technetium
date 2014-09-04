@@ -1,4 +1,4 @@
-module.exports = function(router, request, async, config) {    
+module.exports = function(router, request, async, config) {
     /**
       * Route to query lines of code added/deleted per contributor within a given repository.
       * params: owner, repo
@@ -26,7 +26,7 @@ module.exports = function(router, request, async, config) {
                         'loc_deleted': 0,
                     };
                 }
-               
+
                 request({
                     url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/stats/contributors' + '?' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,
                     headers: { 'user-agent': 'git-technetium' },

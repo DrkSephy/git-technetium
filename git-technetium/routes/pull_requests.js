@@ -1,4 +1,4 @@
-module.exports = function(router, request, async, config) { 
+module.exports = function(router, request, async, config) {
     /**
      * Route to query the total pull requests per contributor within a given repository
      * params: ownerName, repoName
@@ -51,7 +51,7 @@ module.exports = function(router, request, async, config) {
                             }
 
                         }
-                    }); 
+                    });
                 }
                 getData(1);
             }

@@ -1,4 +1,4 @@
-module.exports = function(router, request, async, config) {    
+module.exports = function(router, request, async, config) {
     /**
      *  Precondition:
      *      ownerName (string): The owner username of the target repository
@@ -29,7 +29,7 @@ module.exports = function(router, request, async, config) {
                 }
 
                 var json = [];
-                var pageCounter = 1; 
+                var pageCounter = 1;
 
                 var getData = function(pageCounter){
                     request({
