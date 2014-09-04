@@ -49,9 +49,9 @@ module.exports = function(router, request, async, config) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
     });
-}
+};

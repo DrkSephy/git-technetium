@@ -87,7 +87,7 @@ module.exports = function(router, request, async, config) {
                                                 res.send(contributorIssuesClosed);
                                             }
 
-                                        })
+                                        });
                                     }, function(err){
                                     // We can access the data processed by async.each through the error callback.
                                     if( err ) {
@@ -102,9 +102,9 @@ module.exports = function(router, request, async, config) {
                             }
                         }
                     });
-                }
+                };
                 getData(1);
             }
         });
     });
-}
+};
