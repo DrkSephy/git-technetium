@@ -61,39 +61,38 @@ module.exports = function(router, request, async, config) {
                                 // For each Issue Number inside of the issueNumbers array, we want to send a request to get that issue's events.
                                 // async.each will apply the request function for each item inside the issueNumbers array.
                                 async.each(issueNumbers, function(number, callback) {
-                                      request({
+                                    request({
                                         url: 'https://api.github.com/repos/' + req.query.owner + '/' + req.query.repo + '/issues/' + number + '/events' + '?' + 'client_id=' + config.CLIENT_ID + '&' + 'client_secret=' + config.CLIENT_SECRET,
                                         headers: { 'user-agent' : 'git-technetium' },
                                         json: true
-                                      }, function(error, response, body){
-                                           if(!error && response.statusCode === 200){
-                                                for(var eventData = 0; eventData < body.length; eventData++){
-                                                    if(body[eventData].event === 'closed'){
-                                                        for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
-                                                            if(body[eventData].actor.login === contributorIssuesClosed[contributorIndex].name){
-                                                                contributorIssuesClosed[contributorIndex].issues_closed++;
-                                                            }
+                                    }, function(error, response, body){
+                                        if(!error && response.statusCode === 200){
+                                            for(var eventData = 0; eventData < body.length; eventData++){
+                                                if(body[eventData].event === 'closed'){
+                                                    for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++){
+                                                        if(body[eventData].actor.login === contributorIssuesClosed[contributorIndex].name){
+                                                            contributorIssuesClosed[contributorIndex].issues_closed++;
                                                         }
                                                     }
                                                 }
-                                           }
-
-                                            // If we have processed all the requests, we send a callback with the data attached.
-                                            // According to the documentation, if you send callback() with anything inside,
-                                            // it gets reported as an error. Conveniently, we can use this to our advantage.
-                                            // When all requests are done, send the data through a callback to access it at
-                                            // the end, and send it up to the server.
-                                             if(issueNumbers.indexOf(number) === issueNumbers.length - 1){
-                                                res.send(contributorIssuesClosed);
                                             }
+                                        }
 
-                                        });
-                                    }, function(err){
+                                        // If we have processed all the requests, we send a callback with the data attached.
+                                        // According to the documentation, if you send callback() with anything inside,
+                                        // it gets reported as an error. Conveniently, we can use this to our advantage.
+                                        // When all requests are done, send the data through a callback to access it at
+                                        // the end, and send it up to the server.
+                                        if(issueNumbers.indexOf(number) === issueNumbers.length - 1){
+                                            res.send(contributorIssuesClosed);
+                                        }
+                                    });
+                                }, function(err){
                                     // We can access the data processed by async.each through the error callback.
                                     if( err ) {
                                         res.send(err.data);
                                     } else {
-                                        console.log("Done");
+                                        console.log('Done');
                                     }
                                 });
                             } else {
