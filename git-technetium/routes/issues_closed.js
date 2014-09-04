@@ -91,9 +91,9 @@ module.exports = function(router, request, async, config) {
                                     }, function(err){
                                     // We can access the data processed by async.each through the error callback.
                                     if( err ) {
-                                      res.send(err.data);
+                                        res.send(err.data);
                                     } else {
-                                      console.log("Done");
+                                        console.log("Done");
                                     }
                                 });
                             } else {
