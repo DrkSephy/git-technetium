@@ -10,7 +10,7 @@ module.exports = function(router, request, async, config) {
      *          state    (string) : The state (open, closed) of an issue in the repository
      *          creator  (string) : The username of the person who opened the issue
      *          assignee (string) : The username of the person who was assigned the issue
-    **/
+     */
     router.get('/issues', function(req, res) {
         var issueData = [];
         var getData = function(pageCounter) {
