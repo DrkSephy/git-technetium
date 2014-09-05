@@ -29,6 +29,6 @@ app.use('/api', router);
 app.use(express.static('./public'));
 
 // Start application server
-app.listen(config.PORT, '127.0.0.1', function(){
+app.listen(config.PORT, '127.0.0.1', function() {
     console.log('Express server started on 127.0.0.1:' + config.PORT);
 });

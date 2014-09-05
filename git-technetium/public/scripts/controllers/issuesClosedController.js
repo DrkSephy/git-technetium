@@ -7,5 +7,5 @@ gitApp.controller('issuesClosedController', function($scope, issuesClosedFactory
         $scope.pageData = issuesClosedFactory.get($scope.owner, $scope.repo).success(function(data) {
             $scope.pageData = data;
         });
-    }
+    };
 });

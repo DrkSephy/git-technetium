@@ -7,5 +7,5 @@ gitApp.controller('issuesAssignedController', function($scope, issuesAssignedFac
         $scope.pageData = issuesAssignedFactory.get($scope.owner, $scope.repo).success(function(data) {
             $scope.pageData = data;
         });
-    }
+    };
 });
