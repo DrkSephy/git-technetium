@@ -11,12 +11,12 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for (var contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
+                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributor_tally = [];
-                for (var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
                         'issue_comments': 0
@@ -33,7 +33,7 @@ module.exports = function(router, request, async, config) {
                     }, function(error, response, body) {
                         if(!error && response.statusCode === 200) {
                             var re = '/pull';
-                            for (var issuesIndex = 0; issuesIndex < body.length; issuesIndex++) {
+                            for(var issuesIndex = 0; issuesIndex < body.length; issuesIndex++) {
                                 if(!body[issuesIndex].html_url.match(re)) {
                                     json.push(body[issuesIndex]);
                                 }

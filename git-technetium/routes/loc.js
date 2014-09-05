@@ -21,7 +21,7 @@ module.exports = function(router, request, async, config) {
                     contributor_loc[contributorIndex] = {
                         'name': contributors[contributorIndex],
                         'loc_added': 0,
-                        'loc_deleted': 0,
+                        'loc_deleted': 0
                     };
                 }
 
