@@ -1,7 +1,8 @@
 'use strict';
 
 var gulp = require('gulp'),
-    jshint = require('gulp-jshint');
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish');
 
 gulp.task('jshint', function() {
     gulp.src([
@@ -10,6 +11,6 @@ gulp.task('jshint', function() {
             'routes/*.js',
             'public/scripts/**/*.js'
         ])
-        .pipe(jshint())
-        .pipe(jshint.reporter('default'));
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter(stylish));
 });
