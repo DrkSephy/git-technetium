@@ -1,8 +1,7 @@
-'use strict';
-
 gitApp.controller('reportController', function($scope, commitsFactory, locFactory, commitCommentsFactory,
                     issuesAssignedFactory, issuesClosedFactory, issuesOpenedFactory, issuesCommentsFactory,
                     pullsFactory, pullRequestCommentsFactory) {
+    'use strict';
 
     $scope.commitData = [];
     $scope.locData = [];

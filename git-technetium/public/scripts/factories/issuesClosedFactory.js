@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.factory('issuesClosedFactory', function($http) {
+    'use strict';
+
     return {
         get: function(owner, repo) {
             return $http({

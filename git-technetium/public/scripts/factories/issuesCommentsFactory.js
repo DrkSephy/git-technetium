@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.factory('issuesCommentsFactory', function($http) {
+    'use strict';
+
     return {
         get: function(owner, repo) {
             return $http({

@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.controller('locController', function($scope, locFactory) {
+    'use strict';
+
     $scope.pageData = [];
 
     $scope.submitQuery = function() {

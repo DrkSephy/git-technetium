@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.factory('pullsFactory', function($http) {
+    'use strict';
+
     return {
         get: function(owner, repo) {
             return $http({
