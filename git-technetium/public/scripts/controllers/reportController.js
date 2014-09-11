@@ -93,7 +93,7 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
 
                 for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++) {
                     for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++) {
-                        if(!(contributors.indexOf(allData[arrayIndex][attributeIndex].name) > -1)) {
+                        if(contributors.indexOf(allData[arrayIndex][attributeIndex].name) < 0) {
                             contributors.push(allData[arrayIndex][attributeIndex].name);
                         }
                     }
@@ -147,7 +147,6 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
         ], function(err, result) {
             $scope.$apply(function() {
                 $scope.parsed = result;
-                console.log($scope.parsed);
             });
         });
     };
