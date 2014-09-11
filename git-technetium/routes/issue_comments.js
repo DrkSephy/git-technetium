@@ -11,12 +11,13 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
+                var contributorIndex;
+                for(contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributor_tally = [];
-                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                      contributor_tally.push({
                         'name': contributors[contributorIndex],
                         'issue_comments': 0
@@ -33,14 +34,15 @@ module.exports = function(router, request, async, config) {
                     }, function(error, response, body) {
                         if(!error && response.statusCode === 200) {
                             var re = '/pull';
-                            for(var issuesIndex = 0; issuesIndex < body.length; issuesIndex++) {
+                            var issuesIndex;
+                            for(issuesIndex = 0; issuesIndex < body.length; issuesIndex++) {
                                 if(!body[issuesIndex].html_url.match(re)) {
                                     json.push(body[issuesIndex]);
                                 }
                             }
 
                             if(body.length < 30) {
-                                for(var issuesIndex = 0; issuesIndex < json.length; issuesIndex++) {
+                                for(issuesIndex = 0; issuesIndex < json.length; issuesIndex++) {
                                     for(var contributorIndex = 0; contributorIndex < contributor_tally.length; contributorIndex++) {
                                         if(json[issuesIndex].user.login === contributor_tally[contributorIndex].name) {
                                             contributor_tally[contributorIndex].issue_comments++;

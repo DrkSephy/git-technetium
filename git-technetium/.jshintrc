@@ -1,7 +1,6 @@
 {
     "globals": {
         "angular": false,
-        "$": false,
-        "gitApp": false
+        "$": false
     }
 }

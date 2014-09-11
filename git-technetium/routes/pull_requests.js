@@ -11,12 +11,13 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for(var contributor_index = 0; contributor_index < body.length; contributor_index++) {
+                var contributor_index;
+                for(contributor_index = 0; contributor_index < body.length; contributor_index++) {
                     contributors.push(body[contributor_index].login);
                 }
 
                 var contributor_tally = [];
-                for(var contributor_index = 0; contributor_index < body.length; contributor_index++) {
+                for(contributor_index = 0; contributor_index < body.length; contributor_index++) {
                     contributor_tally.push({
                         'name' : contributors[contributor_index],
                         'total': 0
@@ -32,12 +33,13 @@ module.exports = function(router, request, async, config) {
                         json: true
                     }, function(error, response, body) {
                         if(!error && response.statusCode === 200) {
-                            for(var pullsIndex = 0; pullsIndex < body.length; pullsIndex++) {
+                            var pullsIndex;
+                            for(pullsIndex = 0; pullsIndex < body.length; pullsIndex++) {
                                 json.push(body[pullsIndex]);
                             }
 
                             if(body.length < 30) {
-                                for(var pullsIndex = 0; pullsIndex < json.length; pullsIndex++) {
+                                for(pullsIndex = 0; pullsIndex < json.length; pullsIndex++) {
                                     for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                                         if(json[pullsIndex].user.login === contributor_tally[contributorIndex].name) {
                                             contributor_tally[contributorIndex].total++;
