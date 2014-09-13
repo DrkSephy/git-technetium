@@ -91,8 +91,9 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                 var contributors = [];
                 var parsedData = [];
 
-                for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++) {
-                    for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++) {
+                var arrayIndex, attributeIndex;
+                for(arrayIndex = 0; arrayIndex < allData.length; arrayIndex++) {
+                    for(attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++) {
                         if(contributors.indexOf(allData[arrayIndex][attributeIndex].name) < 0) {
                             contributors.push(allData[arrayIndex][attributeIndex].name);
                         }
@@ -103,8 +104,8 @@ gitApp.controller('reportController', function($scope, commitsFactory, locFactor
                     var contributorData = {};
                     parsedData.push(contributorData);
 
-                    for(var arrayIndex = 0; arrayIndex < allData.length; arrayIndex++) {
-                        for(var attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++) {
+                    for(arrayIndex = 0; arrayIndex < allData.length; arrayIndex++) {
+                        for(attributeIndex = 0; attributeIndex < allData[arrayIndex].length; attributeIndex++) {
                             if(typeof(allData[arrayIndex][contributorIndex].name) !== 'undefined') {
                                 parsedData[contributorIndex]['name'] = allData[arrayIndex][contributorIndex].name;
                             }
