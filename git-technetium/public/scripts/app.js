@@ -1,9 +1,9 @@
-'use strict';
-
 var gitApp = angular.module('gitApp', [
     'ui.router'
 ])
 .config(function($stateProvider, $urlRouterProvider) {
+    'use strict';
+
     $stateProvider
         .state('hello', {
             url: '/hello',

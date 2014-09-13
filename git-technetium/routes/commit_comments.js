@@ -13,12 +13,13 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for(var contributor_index = 0; contributor_index < body.length; contributor_index++) {
+                var contributor_index;
+                for(contributor_index = 0; contributor_index < body.length; contributor_index++) {
                     contributors.push(body[contributor_index].login);
                 }
 
                 var contributor_comments = [];
-                for(var contributor_index = 0; contributor_index < contributors.length; contributor_index++) {
+                for(contributor_index = 0; contributor_index < contributors.length; contributor_index++) {
                     contributor_comments[contributor_index] = {
                         'name': contributors[contributor_index],
                         'commit_comments': 0

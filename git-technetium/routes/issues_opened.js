@@ -16,12 +16,13 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
+                var contributorIndex;
+                for(contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributorIssuesOpened = [];
-                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                     contributorIssuesOpened.push({
                         'name': contributors[contributorIndex],
                         'issues_opened': 0
@@ -37,14 +38,15 @@ module.exports = function(router, request, async, config) {
                         json: true
                     }, function(error, response, body) {
                         if(!error && response.statusCode === 200) {
-                            for(var issueIndex = 0; issueIndex < body.length; issueIndex++) {
+                            var issueIndex;
+                            for(issueIndex = 0; issueIndex < body.length; issueIndex++) {
                                 if(!body[issueIndex].pull_request) {
                                     json.push(body[issueIndex]);
                                 }
                             }
 
                             if(body.length < 30) {
-                                for(var issueIndex = 0; issueIndex < json.length; issueIndex++) {
+                                for(issueIndex = 0; issueIndex < json.length; issueIndex++) {
                                     for(var contributor_index = 0; contributor_index < contributorIssuesOpened.length; contributor_index++) {
                                         if(json[issueIndex].user.login === contributorIssuesOpened[contributor_index].name) {
                                             contributorIssuesOpened[contributor_index].issues_opened++;

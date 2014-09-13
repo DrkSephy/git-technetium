@@ -16,12 +16,13 @@ module.exports = function(router, request, async, config) {
         }, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 var contributors = [];
-                for(var contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
+                var contributorIndex;
+                for(contributorIndex = 0; contributorIndex < body.length; contributorIndex++) {
                     contributors.push(body[contributorIndex].login);
                 }
 
                 var contributorIssuesClosed = [];
-                for(var contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
+                for(contributorIndex = 0; contributorIndex < contributors.length; contributorIndex++) {
                     contributorIssuesClosed.push({
                         'name': contributors[contributorIndex],
                         'issues_closed': 0

@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.controller('pullRequestCommentsController', function($scope, pullRequestCommentsFactory) {
+    'use strict';
+
     $scope.pageData = [];
 
     $scope.submitQuery = function() {

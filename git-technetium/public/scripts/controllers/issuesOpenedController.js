@@ -1,6 +1,6 @@
-'use strict';
-
 gitApp.controller('issuesOpenedController', function($scope, issuesOpenedFactory) {
+    'use strict';
+
     $scope.pageData = [];
 
     $scope.submitQuery = function() {
