@@ -43,7 +43,7 @@ Useful Libraries / Links
 * [pdfmake](http://pdfmake.org/#/) - A client/server-side PDF printing library.
 * [QUnit](http://qunitjs.com/) - A powerful JavaScript unit-testing framework.
 * [UnitJS](http://unitjs.com/) - Another powerful JavaScript unit-testing framework. 
-* [mocha](http://visionmedia.github.io/mocha/) - A JavaScript testing framework with powerful testing features. 
+* [mocha](http://mochajs.org/) - A JavaScript testing framework with powerful testing features. 
 * [D3](http://d3js.org/) - A JavaScript library for using documents as data. Useful for a wide array of graphs.
 * [PhantomJS](http://phantomjs.org/) - A headless WebKit with a JavaScript API, useful for testing with frameworks such as Mocha.
 * [Git API](https://developer.github.com/v3/) - Github API.
